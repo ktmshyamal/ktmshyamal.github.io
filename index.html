@@ -1,0 +1,1221 @@
+<title>Gayan Shyamal — Visual &amp; Motion Designer</title>
+<meta name="description" content="Gayan Shyamal is a visual and motion designer in Sri Lanka with 4+ years of branding, motion graphics, travel films and AI visuals for international teams.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gayan Shyamal — Visual &amp; Motion Designer">
+<meta property="og:description" content="Branding, motion graphics, travel films and AI visuals. A scroll-driven descent through the work.">
+<meta property="og:image" content="summit-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  /* Layout concept: one sticky full-viewport stage. Scroll drives a descent from the summit (4,200 m) to sea level (0 m) through six scenes; a canvas landscape moves in parallax while giant condensed type rises in letter by letter. */
+  --night:#05060a;
+  --deep:#0a0d16;
+  --snow:#eef2f6;
+  --mist:#9aa7b8;
+  --line:rgba(238,242,246,.22);
+  --accent-rgb:255,176,124;
+  --f-display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --f-body:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --gx:clamp(20px,5vw,72px);
+  color-scheme:dark;
+}
+html{scroll-behavior:auto}
+body{background:var(--night);color:var(--snow);font-family:var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+button:focus-visible{outline:2px solid rgb(var(--accent-rgb));outline-offset:3px}
+
+.track{position:relative;height:600vh;height:600svh}
+/* Readable by search engines and screen readers without being on screen. */
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.sr a{color:inherit}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--night);isolation:isolate}
+#bg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+.vwrap{position:absolute;inset:0;z-index:0;overflow:hidden;transform-origin:50% 42%;will-change:transform;background:var(--night)}
+.vwrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.shade{position:absolute;inset:0;z-index:1;background:var(--night);opacity:0;pointer-events:none}
+.grade{position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:multiply;background:#fff}
+.alt .tod{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#c3cedd;white-space:nowrap}
+.snd{pointer-events:auto;cursor:pointer;margin-top:6px;background:rgba(5,6,10,.35);border:1px solid var(--line);color:var(--snow);font:500 10px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;padding:8px 11px}
+.snd[aria-pressed="true"]{border-color:rgb(var(--accent-rgb));color:rgb(var(--accent-rgb))}
+.snd[hidden]{display:none}
+.scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(5,6,10,.74) 0%,rgba(5,6,10,.46) 45%,rgba(5,6,10,.14) 80%),linear-gradient(0deg,rgba(5,6,10,.55) 0%,rgba(5,6,10,0) 35%),linear-gradient(180deg,rgba(5,6,10,.5) 0%,rgba(5,6,10,0) 24%)}
+@media (max-width:899px){.scrim{background:linear-gradient(180deg,rgba(5,6,10,.7) 0%,rgba(5,6,10,.5) 50%,rgba(5,6,10,.38) 72%,rgba(5,6,10,.62) 100%)}}
+.grain{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.08;mix-blend-mode:overlay;background-size:160px 160px}
+
+/* HUD */
+.bar{position:absolute;left:0;right:0;top:env(safe-area-inset-top,0px);height:2px;background:rgb(var(--accent-rgb));transform-origin:0 50%;transform:scaleX(0);z-index:6}
+.hud{position:absolute;inset:0;z-index:4;pointer-events:none;display:flex;justify-content:space-between;align-items:flex-start;
+  padding-top:calc(22px + env(safe-area-inset-top,0px));
+  padding-left:max(var(--gx),env(safe-area-inset-left,0px));
+  padding-right:max(var(--gx),env(safe-area-inset-right,0px))}
+.brand{display:flex;align-items:center;gap:10px;font:500 12px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase}
+/* The footage can be very bright behind the HUD, so the readings carry their own shadow. */
+.brand,.alt{text-shadow:0 1px 16px rgba(0,0,0,.9),0 0 3px rgba(0,0,0,.55)}
+.brand svg{color:rgb(var(--accent-rgb))}
+.alt{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-family:var(--f-mono)}
+.alt .lbl{font-size:10px;letter-spacing:.24em;color:#c3cedd}
+.alt .val{font-size:22px;line-height:1;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.alt .val small{font-size:12px;color:rgb(var(--accent-rgb));margin-left:4px}
+.hint{position:absolute;left:50%;transform:translateX(-50%);z-index:4;bottom:calc(20px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:center;gap:10px;font:500 10px/1 var(--f-mono);letter-spacing:.28em;text-transform:uppercase;color:var(--snow);pointer-events:none}
+.hint i{display:block;width:1px;height:34px;background:linear-gradient(var(--snow),transparent);transform-origin:top;animation:drip 1.9s ease-in-out infinite}
+.skip{pointer-events:auto;cursor:pointer;background:rgba(5,6,10,.42);border:1px solid var(--line);color:var(--snow);font:500 10px/1 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;padding:9px 13px}
+.skip:hover{border-color:rgb(var(--accent-rgb));color:rgb(var(--accent-rgb))}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+.rail{position:absolute;z-index:4;right:max(18px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.rail button{pointer-events:auto;display:flex;align-items:center;gap:12px;background:none;border:0;padding:7px 0;cursor:pointer;font:500 10px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
+.rail .rl{opacity:0;transform:translateX(6px);transition:opacity .2s,transform .2s;white-space:nowrap;background:rgba(5,6,10,.6);padding:5px 8px}
+/* Hovering anywhere on the rail reveals every label, so one pass of the mouse shows what the dots are. */
+.rail:hover .rl,.rail button:hover .rl,.rail button:focus-visible .rl{opacity:1;transform:none;color:var(--snow)}
+.rail .dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--snow);background:transparent;transition:transform .25s,background .25s}
+.rail button.on .dot{background:rgb(var(--accent-rgb));border-color:rgb(var(--accent-rgb));transform:scale(1.5)}
+
+/* Chapters */
+.chap{position:absolute;inset:0;z-index:2;visibility:hidden;pointer-events:none}
+.chap.hero{visibility:visible}
+.copy{position:absolute;left:max(var(--gx),env(safe-area-inset-left,0px));right:max(var(--gx),env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);z-index:2;display:flex;flex-direction:column;align-items:flex-start}
+.kicker{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font:500 11px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:rgb(var(--accent-rgb))}
+.kicker::before{content:"";width:34px;height:1px;background:currentColor}
+.kicker span+span{color:var(--mist)}
+.word{margin:18px 0 22px;font-family:var(--f-display);font-weight:800;text-transform:uppercase;white-space:nowrap;font-size:calc(var(--k,17)*1vw);text-shadow:0 4px 40px rgba(0,0,0,.35)}
+.line{display:block;overflow:hidden;line-height:.9;padding-block:.08em;margin-block:-.08em}
+.ch{display:inline-block;will-change:transform}
+.sp{display:inline-block;width:.2em}
+.line.out .ch{color:transparent;-webkit-text-stroke:max(1.5px,.014em) var(--snow);text-shadow:none}
+.desc{max-width:36ch;font-size:clamp(15px,1.25vw,19px);line-height:1.55;color:#cdd6e1}
+.tags{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.tags li{font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding:8px 11px;border:1px solid var(--line);color:var(--snow);background:rgba(5,6,10,.35)}
+.mailrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin-top:26px}
+.mail{font:500 clamp(15px,1.6vw,22px)/1 var(--f-mono);letter-spacing:.02em;padding:12px 0;border-bottom:1px solid rgb(var(--accent-rgb));user-select:all;word-break:break-all}
+.copybtn{pointer-events:auto;cursor:pointer;background:rgb(var(--accent-rgb));color:#12100e;border:0;padding:13px 18px;font:600 11px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase}
+.copybtn:hover{filter:brightness(1.1)}
+.work{margin:18px 0 0;max-width:52ch;font:500 11px/1.7 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
+
+@media (min-width:900px){
+  .word{font-size:min(calc(var(--k,17)*.68vw),17rem)}
+  /* Sections that show project frames keep their text in the left column, so the big word never runs under the work. */
+  .chap.hasf .copy{right:calc(max(var(--gx),env(safe-area-inset-right,0px)) + min(40vw,600px) + 4vw)}
+}
+
+/* Frames: placeholders for the person's own work */
+.frames{position:absolute;right:max(var(--gx),env(safe-area-inset-right,0px));top:50%;z-index:1;width:min(40vw,600px);height:min(72svh,660px);transform:translateY(-50%)}
+.frame{position:absolute;overflow:hidden;background:var(--deep);border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 80px -20px rgba(0,0,0,.75);will-change:transform,opacity}
+.frame.a{left:0;top:0;width:46%;aspect-ratio:4/5}
+.frame.b{right:0;top:20%;width:50%;aspect-ratio:1/1.15}
+/* Kept clear of frame b's right-hand column so it never covers that frame's caption as the two drift. */
+.frame.c{left:6%;bottom:0;width:36%;aspect-ratio:4/5}
+.art{position:absolute;inset:0}
+/* A frame holds a real image or clip as soon as one is listed in WORK; until then the placeholder art shows. */
+.frame .media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.frame .hit{position:absolute;inset:0;z-index:2;pointer-events:auto;transition:background .2s}
+.frame .hit:hover{background:rgba(255,255,255,.07)}
+.frame .hit:focus-visible{outline:2px solid rgb(var(--accent-rgb));outline-offset:-3px}
+.frame .cap{z-index:3}
+.cap span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cap span:last-child{flex:none}
+.tags a{pointer-events:auto;color:inherit;text-decoration:none;border-bottom:1px solid rgb(var(--accent-rgb));padding-bottom:2px}
+.tags a:hover{color:rgb(var(--accent-rgb))}
+a:focus-visible{outline:2px solid rgb(var(--accent-rgb));outline-offset:3px}
+.cap{position:absolute;left:10px;right:10px;bottom:9px;display:flex;justify-content:space-between;gap:8px;font:500 9.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,246,.85)}
+.art.mark{background:radial-gradient(circle at 50% 46%,rgb(var(--c)) 0 21%,transparent 21.5%),repeating-conic-gradient(from 0deg at 50% 46%,rgba(var(--c),.38) 0 6deg,transparent 6deg 12deg),linear-gradient(160deg,#151b29,#0a0d16)}
+.art.grid{background:repeating-linear-gradient(0deg,rgba(var(--c),.22) 0 1px,transparent 1px 22px),repeating-linear-gradient(90deg,rgba(var(--c),.22) 0 1px,transparent 1px 22px),linear-gradient(140deg,#121827,#0a0d16)}
+.art.grid::after{content:"";position:absolute;left:14%;top:18%;width:46%;height:34%;background:rgb(var(--c))}
+.art.ui{background:linear-gradient(rgb(var(--c)),rgb(var(--c))) 8% 9%/84% 5% no-repeat,linear-gradient(rgba(255,255,255,.16),rgba(255,255,255,.16)) 8% 22%/62% 24% no-repeat,linear-gradient(rgba(255,255,255,.09),rgba(255,255,255,.09)) 8% 52%/38% 28% no-repeat,linear-gradient(rgba(255,255,255,.09),rgba(255,255,255,.09)) 54% 52%/38% 28% no-repeat,linear-gradient(160deg,#111827,#0a0d16)}
+.art.sun{background:radial-gradient(circle at 50% 62%,rgb(var(--c)) 0 14%,rgba(var(--c),.28) 14.5% 30%,transparent 31%),linear-gradient(180deg,#1a1630 0%,#2b1d3d 56%,#0a0d16 56.5%)}
+.art.wave{background:repeating-radial-gradient(circle at 30% 120%,transparent 0 14px,rgba(var(--c),.55) 14px 16px),linear-gradient(200deg,#161a2e,#0a0d16)}
+.art.bokeh{background:radial-gradient(circle at 28% 32%,rgba(var(--c),.85) 0 9%,transparent 9.5%),radial-gradient(circle at 68% 24%,rgba(255,255,255,.35) 0 6%,transparent 6.5%),radial-gradient(circle at 56% 66%,rgba(var(--c),.5) 0 14%,transparent 14.5%),radial-gradient(circle at 22% 78%,rgba(255,255,255,.2) 0 10%,transparent 10.5%),linear-gradient(170deg,#141728,#080a12)}
+.art.strip{background:repeating-linear-gradient(115deg,rgba(var(--c),.6) 0 10px,transparent 10px 26px),linear-gradient(160deg,#151927,#0a0d16)}
+.art.strip::after{content:"";position:absolute;top:0;bottom:0;left:62%;width:2px;background:var(--snow)}
+
+@media (max-width:899px){
+  .copy{top:calc(14svh + env(safe-area-inset-top,0px));transform:none}
+  /* Keep the section nav on phones, as dots only. */
+  .rail{right:max(9px,env(safe-area-inset-right,0px));gap:1px}
+  .rail .rl{display:none}
+  .rail .dot{width:6px;height:6px}
+  .rail button{padding:6px 2px}
+  .frames{left:max(var(--gx),env(safe-area-inset-left,0px));right:max(var(--gx),env(safe-area-inset-right,0px));top:auto;bottom:calc(8svh + env(safe-area-inset-bottom,0px));width:auto;height:auto;transform:none;display:flex;gap:10px;align-items:flex-end}
+  .frame.a,.frame.b,.frame.c{position:relative;left:auto;right:auto;top:auto;bottom:auto;flex:1 1 0;min-width:0;width:auto;aspect-ratio:3/4}
+  .frame.b{margin-bottom:20px}
+  .cap span:last-child{display:none}
+}
+@media (max-width:520px){
+  .alt .tod{font-size:9px;letter-spacing:.1em}
+  .brand{font-size:11px;letter-spacing:.14em}
+}
+@media (prefers-reduced-motion:reduce){
+  .hint i{animation:none;transform:scaleY(1)}
+}
+</style>
+
+<main class="track" id="track">
+  <div class="stage" id="stage">
+    <div class="vwrap" id="vwrap"><video id="vid" src="summit.mp4" poster="summit-poster.jpg" muted playsinline preload="auto" tabindex="-1" aria-hidden="true" disablepictureinpicture disableremoteplayback></video></div>
+    <div class="shade" id="shade"></div>
+    <div class="grade" id="grade"></div>
+    <canvas id="bg" aria-hidden="true"></canvas>
+    <div class="scrim" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="bar" id="bar"></div>
+
+    <header class="hud">
+      <div class="brand">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 20.5 9 6.5l4.2 7.6 2.8-4.1 6.5 10.5z" fill="currentColor"/></svg>
+        <span class="js-name">Gayan Shyamal</span>
+      </div>
+      <div class="alt" aria-live="off">
+        <span class="lbl">Altitude</span>
+        <span class="val"><span id="altv">4,200</span><small>m</small></span>
+        <span class="tod" id="tod">06:10 · Morning · Mist</span>
+        <button class="snd" id="snd" type="button" aria-pressed="false">Sound off</button>
+      </div>
+    </header>
+
+    <nav class="rail" id="rail" aria-label="Sections"></nav>
+
+    <div class="hint" id="hint"><span>Scroll to descend</span><i></i><button class="skip" id="skip" type="button">Skip to the work</button></div>
+
+    <!-- 00 Summit -->
+    <section class="chap hero" data-a="-0.2" data-b="0.15" data-label="Summit" data-hold="0">
+      <div class="copy">
+        <p class="kicker" data-fx="0"><span>Visual &amp; Motion Designer</span><span>Summit · 4,200 m</span></p>
+        <h1 class="word" style="--k:15" data-lines="THE VIEW|FROM HERE" data-out="1"></h1>
+        <p class="desc" data-fx=".25">Senior motion designer and video editor with 4+ years of creating content for international audiences. Scroll to descend through the work.</p>
+      </div>
+    </section>
+
+    <!-- 01 Branding -->
+    <section class="chap" data-a="0.14" data-b="0.37" data-label="Branding" data-idx="01 / 04" style="--c:255,159,107">
+      <div class="copy">
+        <p class="kicker" data-fx="0"></p>
+        <h2 class="word" style="--k:20" data-lines="BRANDING"></h2>
+        <p class="desc" data-fx=".25">Logos, posters, vector illustrations and branded visuals for local and international clients.</p>
+        <ul class="tags" data-fx=".4"><li>Logo</li><li>Posters</li><li>Illustrator</li></ul>
+      </div>
+      <div class="frames" aria-hidden="true">
+        <div class="frame a"><div class="art mark"></div><div class="cap"><span>Project 01</span><span>Your image here</span></div></div>
+        <div class="frame b"><div class="art grid"></div><div class="cap"><span>Project 02</span><span>Your image here</span></div></div>
+        <div class="frame c"><div class="art mark"></div><div class="cap"><span>Project 03</span><span>Your image here</span></div></div>
+      </div>
+    </section>
+
+    <!-- 02 Web design -->
+    <section class="chap" data-a="0.36" data-b="0.58" data-label="Motion" data-idx="02 / 04" style="--c:143,208,255">
+      <div class="copy">
+        <p class="kicker" data-fx="0"></p>
+        <h2 class="word" style="--k:20" data-lines="MOTION"></h2>
+        <p class="desc" data-fx=".25">Motion graphics, edits and promo videos for campaigns and events.</p>
+        <ul class="tags" data-fx=".4"><li>After Effects</li><li>Premiere</li><li>CapCut</li></ul>
+      </div>
+      <div class="frames" aria-hidden="true">
+        <div class="frame a"><div class="art strip"></div><div class="cap"><span>Project 01</span><span>Your image here</span></div></div>
+        <div class="frame b"><div class="art wave"></div><div class="cap"><span>Project 02</span><span>Your image here</span></div></div>
+        <div class="frame c"><div class="art grid"></div><div class="cap"><span>Project 03</span><span>Your image here</span></div></div>
+      </div>
+    </section>
+
+    <!-- 03 Photography -->
+    <section class="chap" data-a="0.57" data-b="0.78" data-label="Travel Films" data-idx="03 / 04" style="--c:201,184,255">
+      <div class="copy">
+        <p class="kicker" data-fx="0"></p>
+        <h2 class="word" style="--k:15" data-lines="TRAVEL FILMS"></h2>
+        <p class="desc" data-fx=".25">Cinematic travel storytelling from Unforgettable Sri Lanka, my own YouTube channel.</p>
+        <ul class="tags" data-fx=".4"><li>YouTube</li><li>Storytelling</li><li>Lightroom</li></ul>
+      </div>
+      <div class="frames" aria-hidden="true">
+        <div class="frame a"><div class="art sun"></div><div class="cap"><span>Project 01</span><span>Your image here</span></div></div>
+        <div class="frame b"><div class="art bokeh"></div><div class="cap"><span>Project 02</span><span>Your image here</span></div></div>
+        <div class="frame c"><div class="art wave"></div><div class="cap"><span>Project 03</span><span>Your image here</span></div></div>
+      </div>
+    </section>
+
+    <!-- 04 Motion -->
+    <section class="chap" data-a="0.77" data-b="0.94" data-label="AI Visuals" data-idx="04 / 04" style="--c:255,176,124">
+      <div class="copy">
+        <p class="kicker" data-fx="0"></p>
+        <h2 class="word" style="--k:17" data-lines="AI VISUALS"></h2>
+        <p class="desc" data-fx=".25">AI-powered image and video generation, from prompt to final delivery.</p>
+        <ul class="tags" data-fx=".4"><li>Prompting</li><li>Image</li><li>Video</li></ul>
+      </div>
+      <div class="frames" aria-hidden="true">
+        <div class="frame a"><div class="art bokeh"></div><div class="cap"><span>Project 01</span><span>Your image here</span></div></div>
+        <div class="frame b"><div class="art sun"></div><div class="cap"><span>Project 02</span><span>Your image here</span></div></div>
+        <div class="frame c"><div class="art mark"></div><div class="cap"><span>Project 03</span><span>Your image here</span></div></div>
+      </div>
+    </section>
+
+    <!-- 05 Sea level -->
+    <section class="chap" data-a="0.93" data-b="1" data-last="1" data-label="Contact" data-hold="1">
+      <div class="copy">
+        <p class="kicker" data-fx="0"><span>Sea level</span><span>0 m</span></p>
+        <h2 class="word" style="--k:17" data-lines="LET’S MAKE|SOMETHING" data-out="1"></h2>
+        <p class="desc" data-fx=".25">Open to remote work with global teams. Send a brief, a mood or just a rough idea.</p>
+        <div class="mailrow" data-fx=".4">
+          <span class="mail js-email" id="mail">ktmshyamal@gmail.com</span>
+          <button class="copybtn" id="copybtn" type="button">Copy email</button>
+        </div>
+        <ul class="tags" data-fx=".5"><li>@gayanshyamal</li><li><a href="https://www.behance.net/ktmshyamal" target="_blank" rel="noopener">Behance</a></li><li>YouTube</li></ul>
+        <p class="work" data-fx=".6">Worked with Airtslab Creatives · Zyntra Digital · Allion Technologies · Firehouse Technology</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- The scroll experience hides each chapter until you reach it, so the same information is kept here in plain text for search engines and screen readers. -->
+  <section class="sr" aria-label="Summary">
+    <h2>Gayan Shyamal — Visual &amp; Motion Designer, Sri Lanka</h2>
+    <p>Senior motion designer and video editor with over four years of creating content for international audiences. Open to remote work with global teams.</p>
+    <h3>Branding</h3>
+    <p>Logos, posters, vector illustrations and branded visuals for local and international clients. Tools: Illustrator.</p>
+    <h3>Motion</h3>
+    <p>Motion graphics, edits and promo videos for campaigns and events. Tools: After Effects, Premiere Pro, CapCut.</p>
+    <h3>Travel films</h3>
+    <p>Cinematic travel storytelling on Unforgettable Sri Lanka, my own YouTube channel. Tools: Lightroom.</p>
+    <h3>AI visuals</h3>
+    <p>AI-powered image and video generation, from prompt to final delivery.</p>
+    <h3>Experience</h3>
+    <p>Airtslab Creatives, Zyntra Digital, Allion Technologies, Firehouse Technology.</p>
+    <h3>Contact</h3>
+    <p>Email <a href="mailto:ktmshyamal@gmail.com">ktmshyamal@gmail.com</a>. Portfolio on <a href="https://www.behance.net/ktmshyamal" rel="noopener">Behance</a>. Instagram @gayanshyamal.</p>
+  </section>
+</main>
+
+<script>
+(() => {
+  /* Edit these three values to personalise the page. */
+  const PROFILE = { name: 'Gayan Shyamal', email: 'ktmshyamal@gmail.com' };
+  const ALT_TOP = 4200;
+  const CAMH = 4.0;
+
+  /* YOUR WORK GOES HERE. Three slots per section, in the order they appear on screen.
+     title  — the caption on the frame
+     badge  — the small label on the right of the caption
+     src    — an image or mp4 published alongside this page, e.g. 'branding-01.jpg'. Leave it
+              empty and the placeholder artwork stays, so nothing breaks until the file exists.
+     href   — where clicking the frame goes. Leave it empty for no link. */
+  const WORK = {
+    'Branding': [
+      { title: 'Corporate profile', badge: 'Behance', src: '', href: 'https://www.behance.net/ktmshyamal' },
+      { title: 'Creative ads', badge: 'Behance', src: '', href: 'https://www.behance.net/ktmshyamal' },
+      { title: 'Automotive design', badge: 'Behance', src: '', href: 'https://www.behance.net/ktmshyamal' }
+    ],
+    'Motion': [
+      { title: 'Cinematic YouTube intros', badge: 'Behance', src: '', href: 'https://www.behance.net/ktmshyamal' },
+      { title: 'Motion graphics', badge: 'Behance', src: '', href: 'https://www.behance.net/ktmshyamal' },
+      { title: 'Product story advert', badge: 'Behance', src: '', href: 'https://www.behance.net/ktmshyamal' }
+    ],
+    'Travel Films': [
+      { title: 'Unforgettable Sri Lanka', badge: 'Film', src: '', href: 'https://www.behance.net/ktmshyamal' },
+      { title: 'Highland route', badge: 'Film', src: '', href: 'https://www.behance.net/ktmshyamal' },
+      { title: 'Coast to coast', badge: 'Film', src: '', href: 'https://www.behance.net/ktmshyamal' }
+    ],
+    'AI Visuals': [
+      { title: 'Generated keyframes', badge: 'AI', src: '', href: 'https://www.behance.net/ktmshyamal' },
+      { title: 'Prompt to film', badge: 'AI', src: '', href: 'https://www.behance.net/ktmshyamal' },
+      { title: 'Concept visuals', badge: 'AI', src: '', href: 'https://www.behance.net/ktmshyamal' }
+    ]
+  };
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const clamp = (v, a = 0, b = 1) => v < a ? a : v > b ? b : v;
+  const sm = (a, b, v) => { const t = clamp((v - a) / (b - a)); return t * t * (3 - 2 * t); };
+  const bump = (p, c, hw) => { const t = clamp(1 - Math.abs(p - c) / hw); return t * t * (3 - 2 * t); };
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  const easeIn = t => t * t * t;
+  const hex = h => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+  const mix = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+  const rgba = (c, a = 1) => 'rgba(' + (c[0] | 0) + ',' + (c[1] | 0) + ',' + (c[2] | 0) + ',' + a + ')';
+  const ramp = (stops, p) => {
+    if (p <= stops[0][0]) return stops[0][1];
+    for (let i = 1; i < stops.length; i++) {
+      if (p <= stops[i][0]) { const a = stops[i - 1], b = stops[i]; return mix(a[1], b[1], (p - a[0]) / (b[0] - a[0])); }
+    }
+    return stops[stops.length - 1][1];
+  };
+  const hash = n => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+  const vnoise = x => { const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f); return hash(i) * (1 - u) + hash(i + 1) * u; };
+  const fbm = (x, seed) => { let v = 0, a = 1, s = 0; for (let o = 0; o < 4; o++) { v += a * vnoise(x * (1 << o) + seed * 13.7); s += a; a *= .5; } return v / s; };
+  const mulberry = a => () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = matchMedia('(pointer: fine)').matches;
+
+  $$('.js-name').forEach(e => e.textContent = PROFILE.name);
+  $$('.js-email').forEach(e => e.textContent = PROFILE.email);
+
+  /* Colour ramps over scroll progress */
+  const SKY_TOP = [[0, hex('#0d1b3e')], [.18, hex('#0e1f45')], [.4, hex('#0a1a2e')], [.62, hex('#100d2b')], [.82, hex('#07060f')], [1, hex('#05060a')]];
+  const SKY_BOT = [[0, hex('#f2a07a')], [.18, hex('#5b7fa6')], [.4, hex('#1f5963')], [.62, hex('#6a2f6b')], [.82, hex('#26123a')], [1, hex('#0a0b12')]];
+  const ACC = [[0, hex('#ffc58a')], [.26, hex('#ff9f6b')], [.47, hex('#8fd0ff')], [.67, hex('#c9b8ff')], [.85, hex('#ffb07c')], [1, hex('#ffc58a')]];
+  const NIGHT = [5, 7, 12];
+  /* Time of day over scroll: light tint multiplied over the video, and the clock in minutes after midnight. */
+  const TOD = [[0, [255, 255, 255]], [.2, [255, 252, 245]], [.4, [232, 244, 255]], [.55, [255, 214, 170]], [.7, [255, 170, 120]], [.82, [120, 130, 205]], [.92, [70, 88, 160]], [1, [55, 72, 140]]];
+  const CLOCK = [[0, [370, 0, 0]], [.2, [540, 0, 0]], [.4, [750, 0, 0]], [.55, [990, 0, 0]], [.7, [1120, 0, 0]], [.82, [1200, 0, 0]], [1, [1350, 0, 0]]];
+  const todLabel = (mins, p) => {
+    const h = Math.floor(mins / 60), m = mins % 60;
+    const phase = mins < 660 ? 'Morning' : mins < 960 ? 'Day' : mins < 1170 ? 'Evening' : 'Night';
+    const wx = p < .28 ? 'Mist' : p < .48 ? 'Clear' : p < .7 ? 'Light rain' : 'Clear';
+    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ' · ' + phase + ' · ' + wx;
+  };
+  let flash = -1, bolt = null, nextFlash = 3;
+
+  const LAYERS = [
+    { k: 'ridge', y0: .56, sp: .15, amp: .10, freq: 3.2, seed: 1.3, c: hex('#8c82ad'), haze: .55, dark: .9 },
+    { k: 'ridge', y0: .68, sp: .26, amp: .12, freq: 4.1, seed: 4.7, c: hex('#5a5f8d'), haze: .4, dark: .92 },
+    { k: 'clouds', y0: .80, sp: .42, n: 7, spread: .05, alpha: .5, scale: 1 },
+    { k: 'ridge', y0: .88, sp: .62, amp: .08, freq: 5.2, seed: 9.1, c: hex('#2d3560'), haze: .2, dark: .94 },
+    { k: 'ridge', y0: .96, sp: .98, amp: .05, freq: 6.5, seed: 2.2, c: hex('#0f1226'), haze: .03, dark: .95, peak: { x: .74, h: .30, wl: .34, wr: .24, e: 1.15, rough: .035 }, hiker: true },
+    { k: 'clouds', y0: 1.32, sp: 1.05, n: 6, spread: .10, alpha: .42, scale: 1.5 },
+    { k: 'ridge', y0: 1.78, sp: .96, amp: .10, freq: 3.5, seed: 6.6, c: hex('#14303a'), haze: .12, dark: .95, trees: 20, tint: .1 },
+    { k: 'ridge', y0: 2.38, sp: .96, amp: .10, freq: 4.4, seed: 8.4, c: hex('#0d2330'), haze: .08, dark: .96, trees: 26, tint: .1 },
+    { k: 'ridge', y0: 2.98, sp: .98, amp: .09, freq: 5.0, seed: 3.9, c: hex('#08161f'), haze: .04, dark: .97, trees: 32, tint: .08 },
+    { k: 'clouds', y0: 3.2, sp: 1.0, n: 5, spread: .05, alpha: .25, scale: 1.8 },
+    { k: 'ridge', y0: 3.55, sp: 1.0, amp: .05, freq: 3.0, seed: 5.5, c: hex('#060d14'), haze: 0, dark: .98, lights: true },
+    { k: 'ridge', y0: 3.98, sp: 1.0, amp: .012, freq: 2, seed: 7.7, c: hex('#04060b'), haze: 0, dark: 1 }
+  ];
+
+  const cv = $('#bg'), ctx = cv.getContext('2d');
+  const STEP = 8;
+  let W = 0, H = 0, DPR = 1, stars = [], vign = null, parts = {};
+  let mode = 'video'; /* 'video' = scroll-scrubbed clip with particles on top; 'canvas' = drawn landscape fallback */
+
+  /* Cloud sprites are built from fractal noise rather than stacked blurry circles, which is what gives them
+     torn edges and dense cores instead of looking like fog. Rendered small and scaled up when drawn: clouds
+     are soft, so the upscale costs nothing visually and keeps the build well under a frame. */
+  const nhash = (a, b, s) => { const n = Math.sin(a * 127.1 + b * 311.7 + s * 74.7) * 43758.5453; return n - Math.floor(n); };
+  function noise2d(x, y, s) {
+    const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+    const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+    const a = nhash(xi, yi, s), b = nhash(xi + 1, yi, s), c = nhash(xi, yi + 1, s), d = nhash(xi + 1, yi + 1, s);
+    const t = a + (b - a) * u;
+    return t + ((c + (d - c) * u) - t) * v;
+  }
+  function fbm2d(x, y, s) {
+    let v = 0, amp = .5, f = 1;
+    for (let i = 0; i < 4; i++) { v += amp * noise2d(x * f, y * f, s + i * 17); f *= 2.03; amp *= .5; }
+    return v;
+  }
+  function mkCloud(w, h, seed) {
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const g = c.getContext('2d'), img = g.createImageData(w, h), d = img.data;
+    for (let y = 0; y < h; y++) {
+      const ny = y / h;
+      for (let x = 0; x < w; x++) {
+        const nx = x / w, i = (y * w + x) * 4;
+        d[i] = d[i + 1] = d[i + 2] = 255;
+        /* Elliptical falloff, squashed harder below the middle so the cloud sits on a flatter base. */
+        const dx = (nx - .5) * 2, dy = (ny - .5) * 2;
+        const r = Math.sqrt(dx * dx + dy * dy * (dy > 0 ? 2.1 : 1.15));
+        let a = 1.08 - r;
+        if (a <= 0) { d[i + 3] = 0; continue; }
+        a -= (1 - fbm2d(nx * 5.5, ny * 5.5, seed)) * .95;
+        a = a < 0 ? 0 : a > 1 ? 1 : a;
+        d[i + 3] = a * a * (3 - 2 * a) * 255;
+      }
+    }
+    g.putImageData(img, 0, 0);
+    return c;
+  }
+  function mkGlow(col) {
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const g = c.getContext('2d'), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(' + col + ',1)'); gr.addColorStop(.25, 'rgba(' + col + ',.45)'); gr.addColorStop(1, 'rgba(' + col + ',0)');
+    g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+    return c;
+  }
+  const CLOUDS = [0, 1, 2, 3, 4].map(i => mkCloud(224, 112, 11 + i * 7));
+  /* Three bands of cloud across the whole scroll. Each drifts on its own at its own speed, and rises
+     slightly as you descend. Counts and alphas are deliberately low: this should read as weather behind
+     the work, never as a layer of its own. */
+  const CLOUD_BANDS = [
+    { n: 5, w: 640, sp: 6, y0: .18, y1: .55, a: .17, par: .15 },
+    { n: 5, w: 980, sp: 13, y0: .45, y1: .85, a: .24, par: .30 },
+    { n: 3, w: 1560, sp: 24, y0: .70, y1: 1.15, a: .17, par: .50 }
+  ];
+  /* Clouds take their colour from the light: warm at first light, cool through the day, warm again at
+     dusk, then moonlit blue. */
+  const CLOUD_TINT = [[0, [255, 234, 211]], [.2, [255, 247, 237]], [.45, [227, 239, 251]], [.62, [255, 212, 183]], [.78, [152, 152, 196]], [1, [88, 102, 152]]];
+  const CDPR = .62;
+  let cloudCv = null, cloudCtx = null, cloudItems = [];
+  const GLOW_WARM = mkGlow('255,222,160');
+  const GLOW_FLY = mkGlow('255,226,176');
+
+  function build() {
+    DPR = Math.min(window.devicePixelRatio || 1, 1.75);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+    const n = Math.ceil((W + 100) / STEP) + 1;
+    const scale = Math.min(1, H / 800 + .35);
+    LAYERS.forEach((L, li) => {
+      if (L.k === 'clouds') {
+        const r = mulberry(100 + li);
+        L.items = Array.from({ length: L.n }, () => ({ sx: r(), sy: r() * 2 - 1, sc: .8 + r() * .8, spr: Math.floor(r() * 5), v: 5 + r() * 13 }));
+        return;
+      }
+      L.off = new Float32Array(n);
+      L.tree = L.trees ? new Float32Array(n) : null;
+      let max = 0, apex = 0;
+      for (let i = 0; i < n; i++) {
+        const x = -20 + i * STEP, u = x / W;
+        let o = fbm(u * L.freq + L.seed, L.seed) * L.amp * H;
+        if (L.peak) {
+          const pk = L.peak, d = x - pk.x * W, w = (d < 0 ? pk.wl : pk.wr) * W, t = Math.max(0, 1 - Math.abs(d) / w);
+          o += Math.pow(t, pk.e) * pk.h * H + (t > 0 ? (fbm(u * 18 + 3.1, 7.7) - .5) * pk.rough * H * t : 0);
+        }
+        L.off[i] = o;
+        if (o > max) { max = o; apex = i; }
+        if (L.tree) L.tree[i] = L.trees * (.6 + .8 * hash(i * 3.7 + L.seed * 11)) * scale;
+      }
+      L.maxTop = max + (L.trees ? L.trees * 1.5 * scale : 0);
+      L.apexI = apex;
+      if (L.lights) {
+        const r = mulberry(555), cnt = Math.round(W / 5);
+        L.lampList = Array.from({ length: cnt }, () => ({ i: Math.floor(r() * n), dy: Math.pow(r(), 1.6) * H * .2 + 6, s: 1.4 + r() * 2.8, ph: 1 + r() * 4 }));
+      }
+    });
+    /* Clouds are composited on a smaller canvas of their own, then tinted in one pass and scaled up. */
+    cloudCv = cloudCv || document.createElement('canvas');
+    cloudCv.width = Math.max(2, Math.round(W * CDPR)); cloudCv.height = Math.max(2, Math.round(H * CDPR));
+    cloudCtx = cloudCv.getContext('2d');
+    const rc = mulberry(31);
+    cloudItems = [];
+    CLOUD_BANDS.forEach((B, bi) => {
+      for (let i = 0; i < B.n; i++) cloudItems.push({ b: bi, sx: rc(), sy: rc(), sc: .72 + rc() * .66, spr: Math.floor(rc() * 5), vs: .7 + rc() * .7 });
+    });
+    const rs = mulberry(42);
+    stars = Array.from({ length: 160 }, () => ({ x: rs() * W, y: rs() * H * .7, r: .4 + rs() * .9, ph: 1 + rs() * 3 }));
+    vign = document.createElement('canvas'); vign.width = Math.max(2, Math.round(W / 2)); vign.height = Math.max(2, Math.round(H / 2));
+    const vg = vign.getContext('2d'), gr = vg.createRadialGradient(vign.width / 2, vign.height / 2, Math.min(vign.width, vign.height) * .35, vign.width / 2, vign.height / 2, Math.max(vign.width, vign.height) * .75);
+    gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,.6)');
+    vg.fillStyle = gr; vg.fillRect(0, 0, vign.width, vign.height);
+    initParticles();
+  }
+
+  function initParticles() {
+    const r = mulberry(9);
+    const mk = (n, f) => Array.from({ length: n }, () => f(r));
+    parts = {
+      snow: mk(120, r => ({ x: r() * W, y: r() * H, r: .6 + r() * 1.6, vy: 15 + r() * 30, ph: r() * 6 })),
+      ember: mk(60, r => ({ x: r() * W, y: r() * H, r: .8 + r() * 1.8, vy: 20 + r() * 40, ph: r() * 6 })),
+      rain: mk(70, r => ({ x: r() * W, y: r() * H, len: 12 + r() * 30, vy: 300 + r() * 300 })),
+      bokeh: mk(26, r => ({ x: r() * W, y: r() * H, r: 14 + r() * 46, vx: 6 + r() * 10, vy: (r() - .5) * 8, a: .05 + r() * .08 })),
+      streak: mk(36, r => ({ x: r() * W, y: r() * H, len: 60 + r() * 140, vx: 700 + r() * 800 })),
+      fly: mk(48, r => ({ x: r() * W, y: H * (.3 + r() * .7), s: 8 + r() * 14, a: r() * 6.28, sp: 8 + r() * 14, ph: 1 + r() * 4 }))
+    };
+  }
+
+  function drawRidge(L, base, col) {
+    const n = L.off.length;
+    ctx.beginPath(); ctx.moveTo(-20, H + 2);
+    if (L.tree) {
+      for (let i = 0; i < n; i++) { const x = -20 + i * STEP, y = base - L.off[i]; ctx.lineTo(x, y - L.tree[i]); ctx.lineTo(x + STEP * .5, y - L.tree[i] * .25); }
+    } else {
+      for (let i = 0; i < n; i++) ctx.lineTo(-20 + i * STEP, base - L.off[i]);
+    }
+    ctx.lineTo(W + 80, H + 2); ctx.closePath();
+    ctx.fillStyle = rgba(col); ctx.fill();
+  }
+
+  function drawHiker(L, base, col, acc, t) {
+    const i = L.apexI, ax = -20 + i * STEP, ay = base - L.off[i], s = Math.max(H * .055, 28);
+    ctx.save(); ctx.translate(ax, ay + 3);
+    ctx.fillStyle = rgba(col); ctx.strokeStyle = rgba(col); ctx.lineCap = 'round'; ctx.lineWidth = s * .11;
+    ctx.beginPath(); ctx.moveTo(-s * .04, -s * .42); ctx.lineTo(-s * .12, 0); ctx.moveTo(s * .04, -s * .42); ctx.lineTo(s * .12, 0); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-s * .1, -s * .42); ctx.lineTo(s * .1, -s * .42); ctx.lineTo(s * .12, -s * .8); ctx.lineTo(-s * .12, -s * .8); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(-s * .15, -s * .64, s * .1, s * .16, 0, 0, 7); ctx.fill();
+    ctx.beginPath(); ctx.arc(0, -s * .92, s * .09, 0, 7); ctx.fill();
+    ctx.lineWidth = s * .07; ctx.beginPath(); ctx.moveTo(s * .1, -s * .76); ctx.lineTo(s * .27, -s * 1.02); ctx.stroke();
+    ctx.strokeStyle = rgba(acc, .95); ctx.lineWidth = Math.max(1.5, s * .05);
+    ctx.beginPath(); ctx.moveTo(-s * .05, -s * .8);
+    ctx.quadraticCurveTo(-s * .22, -s * .8 + Math.sin(t * 5) * s * .05, -s * .36, -s * .76 + Math.sin(t * 5 + 1) * s * .06);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  /* Night sky and evening glow, drawn over the video. */
+  function drawSky(p, t) {
+    const night = sm(.72, .92, p), eve = bump(p, .66, .16);
+    if (night > .01) {
+      ctx.fillStyle = '#fff';
+      for (const s of stars) {
+        const a = night * (.5 + .5 * Math.sin(t * s.ph + s.x)) * (1 - s.y / (H * .62));
+        if (a <= .02) continue;
+        ctx.globalAlpha = a; ctx.fillRect(s.x, s.y, s.r, s.r);
+      }
+      const mx = W * (W < 600 ? .82 : .8), my = H * (W < 600 ? .14 : .2), mr = Math.max(18, H * .035);
+      const g = ctx.createRadialGradient(mx, my, 0, mx, my, mr * 7);
+      g.addColorStop(0, 'rgba(210,225,255,.55)'); g.addColorStop(1, 'rgba(210,225,255,0)');
+      ctx.globalAlpha = night * .9; ctx.fillStyle = g; ctx.fillRect(mx - mr * 7, my - mr * 7, mr * 14, mr * 14);
+      ctx.globalAlpha = night; ctx.fillStyle = '#eef3ff'; ctx.beginPath(); ctx.arc(mx, my, mr, 0, 7); ctx.fill();
+    }
+    if (eve > .01) {
+      ctx.globalCompositeOperation = 'screen';
+      const g = ctx.createRadialGradient(W * .75, H * .88, 0, W * .75, H * .88, H * .95);
+      g.addColorStop(0, 'rgba(255,150,90,' + (.38 * eve).toFixed(3) + ')'); g.addColorStop(1, 'rgba(255,150,90,0)');
+      ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'source-over';
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  /* Low drifting mist, strongest in the morning. */
+  function drawClouds(p, t) {
+    if (!cloudCtx) return;
+    /* Present the whole way down, thickest just below the summit where you break through the deck,
+       and pulled back at night so the stars stay the brightest thing on screen. */
+    const am = .6 + .3 * bump(p, .16, .3) - .3 * sm(.74, 1, p);
+    if (am < .03) return;
+    const cg = cloudCtx;
+    cg.setTransform(CDPR, 0, 0, CDPR, 0, 0);
+    cg.globalCompositeOperation = 'source-over';
+    cg.clearRect(0, 0, W, H);
+    const ws = Math.min(1.5, Math.max(.65, W / 1200));
+    for (const c of cloudItems) {
+      const B = CLOUD_BANDS[c.b];
+      const w = B.w * ws * c.sc, h = w * .44, span = W + w * 2;
+      const x = ((c.sx * span + t * B.sp * c.vs) % span) - w;
+      const y = H * (B.y0 + (B.y1 - B.y0) * c.sy) - h / 2 - p * H * B.par;
+      if (y > H || y + h < 0) continue;
+      cg.globalAlpha = B.a;
+      cg.drawImage(CLOUDS[c.spr], x, y, w, h);
+    }
+    /* One fill tints every cloud at once, so the colour can follow the time of day without rebuilding sprites. */
+    cg.globalCompositeOperation = 'source-atop';
+    cg.globalAlpha = 1;
+    cg.fillStyle = rgba(ramp(CLOUD_TINT, p));
+    cg.fillRect(0, 0, W, H);
+    ctx.globalAlpha = clamp(am);
+    ctx.drawImage(cloudCv, 0, 0, W, H);
+    ctx.globalAlpha = 1;
+  }
+
+  /* A jagged bolt with branches, from the top of the screen. */
+  function makeBolt() {
+    const pts = [], branches = [];
+    let x = W * (.2 + .6 * Math.random()), y = -10;
+    const endY = H * (.4 + .2 * Math.random());
+    pts.push([x, y]);
+    while (y < endY) {
+      y += 14 + Math.random() * 26; x += (Math.random() - .5) * 46; pts.push([x, y]);
+      if (Math.random() < .14) {
+        const br = [[x, y]], dir = Math.random() < .5 ? -1 : 1;
+        let bx = x, by = y;
+        for (let k = 0; k < 5; k++) { by += 12 + Math.random() * 18; bx += dir * (8 + Math.random() * 22); br.push([bx, by]); }
+        branches.push(br);
+      }
+    }
+    return { pts, branches };
+  }
+
+  /* Thunderstorm while it rains: a double flash that lights the whole scene, a bolt, then thunder (if sound is on).
+     One strike every 5 to 11 seconds, never more than a few flashes in a second. Skipped when reduced motion is on. */
+  function lightning(p, dt) {
+    if (bump(p, .58, .13) > .35) nextFlash -= dt;
+    if (nextFlash <= 0) { flash = 0; bolt = makeBolt(); nextFlash = 5 + Math.random() * 6; thunder(); }
+    if (flash < 0) return;
+    flash += dt;
+    const e = flash;
+    const k = e < .07 ? 1 : e < .13 ? .15 : e < .22 ? .85 : Math.max(0, 1 - (e - .22) / .4);
+    if (k <= 0) { flash = -1; bolt = null; return; }
+    ctx.globalAlpha = .4 * k; ctx.fillStyle = '#dbe7ff'; ctx.fillRect(0, 0, W, H);
+    if (bolt && k > .3) {
+      ctx.globalAlpha = k; ctx.strokeStyle = '#eef4ff'; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      ctx.shadowColor = '#9fc4ff'; ctx.shadowBlur = 18; ctx.lineWidth = 2.4;
+      ctx.beginPath(); bolt.pts.forEach((q, i) => i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); ctx.stroke();
+      ctx.lineWidth = 1.2;
+      bolt.branches.forEach(br => { ctx.beginPath(); br.forEach((q, i) => i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); ctx.stroke(); });
+      ctx.shadowBlur = 0;
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function render(p, t, dt) {
+    if (mode === 'video') {
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+      ctx.clearRect(0, 0, W, H);
+      drawSky(p, t);
+      /* Clouds stay even with reduced motion on, frozen rather than removed. */
+      drawClouds(p, reduce ? 0 : t);
+      if (!reduce) { drawParticles(p, t, dt, ramp(ACC, p)); lightning(p, dt); }
+      ctx.globalAlpha = .55;
+      if (vign) ctx.drawImage(vign, 0, 0, W, H);
+      ctx.globalAlpha = 1;
+      return;
+    }
+    const cam = p * CAMH, k = sm(.04, .78, p);
+    const skyT = ramp(SKY_TOP, p), skyB = ramp(SKY_BOT, p), acc = ramp(ACC, p);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, rgba(skyT)); g.addColorStop(.72, rgba(skyB)); g.addColorStop(1, rgba(skyB));
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+    const sa = sm(.12, .5, p);
+    if (sa > .01) {
+      ctx.fillStyle = '#fff';
+      for (const s of stars) {
+        const a = sa * (.55 + .45 * Math.sin(t * s.ph + s.x)) * (1 - s.y / (H * .75));
+        if (a <= .02) continue;
+        ctx.globalAlpha = a; ctx.fillRect(s.x, s.y, s.r, s.r);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    const ga = .5 * (1 - sm(0, .55, p)) + .1;
+    ctx.globalCompositeOperation = 'screen';
+    const gy = H * (.62 - cam * .18), gr = ctx.createRadialGradient(W * .7, gy, 0, W * .7, gy, H * .75);
+    gr.addColorStop(0, rgba(mix(acc, [255, 255, 255], .15), ga)); gr.addColorStop(1, rgba(acc, 0));
+    ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'source-over';
+
+    for (const L of LAYERS) {
+      const base = (L.y0 - cam * L.sp) * H;
+      if (L.k === 'clouds') {
+        if (base - L.spread * H - 220 > H || base + L.spread * H + 220 < 0) continue;
+        const al = L.alpha * (1 - .72 * k);
+        ctx.globalAlpha = al;
+        const ws = Math.min(1.4, Math.max(.6, W / 1200)) * L.scale, span = W + 800;
+        for (const c of L.items) {
+          const w = 520 * ws * c.sc, h = 200 * ws * c.sc;
+          const x = ((c.sx * span + t * c.v) % span) - 400;
+          ctx.drawImage(CLOUDS[c.spr], x, base + c.sy * L.spread * H - h / 2, w, h);
+        }
+        ctx.globalAlpha = 1;
+        continue;
+      }
+      if (base - L.maxTop > H) continue;
+      let col = mix(L.c, skyB, L.haze * (1 - k * .6));
+      col = mix(col, NIGHT, k * L.dark);
+      if (L.tint) col = mix(col, acc, L.tint * .5);
+      drawRidge(L, base, col);
+      if (L.hiker) drawHiker(L, base, col, acc, t);
+      if (L.lampList) {
+        ctx.globalCompositeOperation = 'lighter';
+        for (const m of L.lampList) {
+          const x = -20 + m.i * STEP, y = base - L.off[m.i] + m.dy;
+          if (y < -10 || y > H + 10) continue;
+          const a = (.5 + .5 * Math.sin(t * m.ph + m.i)) * .75 + .2, sz = m.s * 5;
+          ctx.globalAlpha = a; ctx.drawImage(GLOW_WARM, x - sz / 2, y - sz / 2, sz, sz);
+        }
+        ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+      }
+    }
+
+    if (!reduce) drawParticles(p, t, dt, acc);
+    ctx.globalAlpha = 1;
+    if (vign) ctx.drawImage(vign, 0, 0, W, H);
+  }
+
+  function drawParticles(p, t, dt, acc) {
+    let w = 1 - sm(.05, .2, p);
+    if (w > .01) {
+      ctx.fillStyle = '#fff';
+      for (const s of parts.snow) {
+        s.y += s.vy * dt; s.x += (Math.sin(t * .6 + s.ph) * 14 + 12) * dt;
+        if (s.y > H + 4) { s.y = -4; s.x = Math.random() * W; } if (s.x > W + 4) s.x = -4;
+        ctx.globalAlpha = (.3 + s.r * .25) * w; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 7); ctx.fill();
+      }
+    }
+    w = bump(p, .27, .2);
+    if (w > .01) {
+      ctx.fillStyle = rgba(acc);
+      for (const s of parts.ember) {
+        s.y -= s.vy * dt; s.x += Math.sin(t + s.ph) * 10 * dt;
+        if (s.y < -4) { s.y = H + 4; s.x = Math.random() * W; }
+        ctx.globalAlpha = (.35 + .3 * Math.sin(t * 2 + s.ph)) * w; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 7); ctx.fill();
+      }
+    }
+    const vm = mode === 'video';
+    w = vm ? bump(p, .58, .13) : bump(p, .47, .18);
+    if (w > .01) {
+      const sl = vm ? .28 : 0;
+      ctx.strokeStyle = vm ? 'rgb(205,222,245)' : rgba(acc); ctx.lineWidth = 1; ctx.globalAlpha = (vm ? .26 : .22) * w; ctx.beginPath();
+      for (const s of parts.rain) {
+        s.y += s.vy * dt; s.x += sl * s.vy * dt;
+        if (s.y - s.len > H || s.x > W + 60) { s.y = -4; s.x = Math.random() * (W + 60) - 60; }
+        ctx.moveTo(s.x, s.y); ctx.lineTo(s.x - sl * s.len, s.y - s.len);
+      }
+      ctx.stroke();
+    }
+    w = (mode === 'video' ? .35 : 1) * bump(p, .67, .18);
+    if (w > .01) {
+      ctx.fillStyle = rgba(mix(acc, [255, 255, 255], .4));
+      for (const s of parts.bokeh) {
+        s.x += s.vx * dt; s.y += s.vy * dt;
+        if (s.x - s.r > W) s.x = -s.r; if (s.y < -s.r) s.y = H + s.r; if (s.y > H + s.r) s.y = -s.r;
+        ctx.globalAlpha = s.a * w; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 7); ctx.fill();
+      }
+    }
+    w = mode === 'video' ? 0 : bump(p, .85, .12);
+    if (w > .01) {
+      ctx.strokeStyle = rgba(acc); ctx.lineWidth = 1.5; ctx.globalAlpha = .35 * w; ctx.beginPath();
+      for (const s of parts.streak) {
+        s.x += s.vx * dt; if (s.x - s.len > W) { s.x = -4; s.y = Math.random() * H; }
+        ctx.moveTo(s.x, s.y); ctx.lineTo(s.x - s.len, s.y);
+      }
+      ctx.stroke();
+    }
+    w = mode === 'video' ? .3 + .25 * sm(.6, .95, p) : sm(.7, .95, p) * .9;
+    if (w > .01) {
+      ctx.globalCompositeOperation = 'lighter';
+      for (const s of parts.fly) {
+        s.a += (Math.sin(t * .7 + s.ph) * 1.2) * dt; s.x += Math.cos(s.a) * s.sp * dt; s.y += Math.sin(s.a) * s.sp * dt;
+        if (s.x < -20) s.x = W + 20; if (s.x > W + 20) s.x = -20; if (s.y < H * .2) s.y = H; if (s.y > H + 20) s.y = H * .25;
+        ctx.globalAlpha = (.35 + .65 * Math.max(0, Math.sin(t * s.ph + s.x))) * w;
+        ctx.drawImage(GLOW_FLY, s.x - s.s / 2, s.y - s.s / 2, s.s, s.s);
+      }
+      ctx.globalCompositeOperation = 'source-over';
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  /* Chapters: build letters and effect lists */
+  const fmt = n => n.toLocaleString('en-US');
+  const chaps = $$('.chap').map(el => {
+    const a = +el.dataset.a, b = +el.dataset.b, last = el.dataset.last === '1';
+    const hold = el.dataset.hold !== undefined ? +el.dataset.hold : (a + b) / 2;
+    const word = $('.word', el), lines = word.dataset.lines.split('|'), outIdx = word.dataset.out !== undefined ? +word.dataset.out : -1;
+    const letters = [];
+    word.textContent = '';
+    /* The animated letters are one span each, which reads as gibberish to a crawler, so the real wording is kept alongside them. */
+    const srw = document.createElement('span'); srw.className = 'sr'; srw.textContent = lines.join(' ');
+    word.appendChild(srw);
+    lines.forEach((ln, li) => {
+      const L = document.createElement('span'); L.className = 'line' + (li === outIdx ? ' out' : ''); L.setAttribute('aria-hidden', 'true');
+      Array.from(ln).forEach(chr => {
+        const s = document.createElement('span');
+        if (chr === ' ') { s.className = 'sp'; L.appendChild(s); return; }
+        s.className = 'ch'; s.textContent = chr; L.appendChild(s); letters.push(s);
+      });
+      word.appendChild(L);
+    });
+    const kick = $('.kicker', el);
+    if (kick && el.dataset.idx) {
+      const alt = Math.round(ALT_TOP * (1 - hold) / 10) * 10;
+      kick.innerHTML = '<span>' + el.dataset.idx + '</span><span>' + fmt(alt) + ' m</span>';
+    }
+    const fx = $$('[data-fx]', el).map(e => ({ el: e, d: +e.dataset.fx }));
+    const work = WORK[el.dataset.label];
+    const framesWrap = $('.frames', el);
+    let live = false;
+    const frames = $$('.frame', el).map((e, i) => {
+      const w = work && work[i], art = $('.art', e);
+      if (art) art.setAttribute('aria-hidden', 'true');
+      if (w) {
+        const cap = $('.cap', e); cap.textContent = '';
+        const s1 = document.createElement('span'), s2 = document.createElement('span');
+        s1.textContent = w.title; s2.textContent = w.badge || ''; cap.append(s1, s2);
+        if (w.src) {
+          const isVid = /\.(mp4|webm|mov)$/i.test(w.src);
+          const m = document.createElement(isVid ? 'video' : 'img');
+          m.className = 'media'; m.src = w.src;
+          if (isVid) {
+            m.muted = true; m.loop = true; m.autoplay = true;
+            m.setAttribute('playsinline', ''); m.setAttribute('aria-hidden', 'true');
+            if (reduce) { m.autoplay = false; m.removeAttribute('autoplay'); }
+          } else { m.alt = w.title; m.loading = 'lazy'; m.decoding = 'async'; }
+          if (art) art.remove();
+          e.insertBefore(m, e.firstChild);
+        }
+        if (w.href) {
+          const a = document.createElement('a');
+          a.className = 'hit'; a.href = w.href; a.target = '_blank'; a.rel = 'noopener';
+          a.setAttribute('aria-label', w.title + (w.badge ? ' — ' + w.badge : ''));
+          e.appendChild(a); live = true;
+        }
+      }
+      return { el: e, d: .15 + i * .15, par: [70, 120, 40][i], dep: [10, 18, 6][i], frame: true };
+    });
+    /* Only expose the frames to assistive tech once they actually lead somewhere. */
+    if (live && framesWrap) framesWrap.removeAttribute('aria-hidden');
+    if (framesWrap) el.classList.add('hasf');
+    return { el, a, b, last, hold, letters, word, copy: $('.copy', el), fx: fx.concat(frames), vis: null, le: -1, lx: -1 };
+  });
+
+  function updateChap(c, p, mx, my) {
+    const len = c.b - c.a, ph = len * .26;
+    const e = clamp((p - c.a) / ph), x = c.last ? 0 : clamp((p - (c.b - ph)) / ph);
+    const lp = clamp((p - c.a) / len);
+    const vis = p >= c.a - .0001 && (c.last || p <= c.b + .0001);
+    if (vis !== c.vis) { c.el.style.visibility = vis ? 'visible' : 'hidden'; c.vis = vis; }
+    if (!vis) return;
+    if (e !== c.le || x !== c.lx) {
+      const n = c.letters.length, s = .7;
+      for (let i = 0; i < n; i++) {
+        const le = clamp(e * (1 + s) - (i / n) * s), lx = clamp(x * (1 + s) - (i / n) * s);
+        const y = (1 - easeOut(le)) * 115 - easeIn(lx) * 115;
+        c.letters[i].style.transform = 'translate3d(0,' + y.toFixed(1) + '%,0)';
+      }
+      c.le = e; c.lx = x;
+    }
+    const xe = clamp(x * 1.5);
+    for (const f of c.fx) {
+      const ve = easeOut(clamp((e - f.d) / (1 - f.d)));
+      f.el.style.opacity = (ve * (1 - xe)).toFixed(3);
+      if (f.frame) {
+        const ty = (1 - ve) * 80 + (.5 - lp) * f.par - xe * 50;
+        f.el.style.transform = 'translate3d(' + (mx * f.dep).toFixed(1) + 'px,' + (ty + my * f.dep).toFixed(1) + 'px,0)';
+      } else {
+        f.el.style.transform = 'translate3d(0,' + ((1 - ve) * 26 - xe * 16).toFixed(1) + 'px,0)';
+      }
+    }
+  }
+
+  /* Shrink any big word that is wider than the screen, whichever font ends up rendering it. */
+  function fitWords() {
+    chaps.forEach(c => {
+      c.word.style.fontSize = '';
+      const avail = c.copy.clientWidth;
+      let widest = 0;
+      $$('.line', c.word).forEach(l => {
+        const w = Array.from(l.children).reduce((s, e) => s + e.offsetWidth, 0);
+        if (w > widest) widest = w;
+      });
+      if (avail > 0 && widest > avail) {
+        const fs = parseFloat(getComputedStyle(c.word).fontSize);
+        c.word.style.fontSize = (fs * avail / widest * .98).toFixed(2) + 'px';
+      }
+    });
+  }
+
+  /* HUD */
+  const stage = $('#stage'), track = $('#track'), bar = $('#bar'), altv = $('#altv'), hint = $('#hint'), rail = $('#rail');
+  const railBtns = chaps.map((c, i) => {
+    const alt = Math.round(ALT_TOP * (1 - c.hold) / 10) * 10;
+    const b = document.createElement('button'); b.type = 'button';
+    b.setAttribute('aria-label', c.el.dataset.label + ', ' + fmt(alt) + ' metres');
+    b.innerHTML = '<span class="rl">' + c.el.dataset.label + ' · ' + fmt(alt) + ' m</span><span class="dot"></span>';
+    b.addEventListener('click', () => {
+      const range = track.offsetHeight - stage.offsetHeight;
+      const top = window.scrollY + track.getBoundingClientRect().top + c.hold * range;
+      window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+    });
+    rail.appendChild(b); return b;
+  });
+  let activeIdx = -1, lastAlt = -1;
+
+  /* Jump straight to the first project, for anyone who would rather not scroll the whole descent. */
+  const goTo = hold => {
+    const range = track.offsetHeight - stage.offsetHeight;
+    const top = window.scrollY + track.getBoundingClientRect().top + hold * range;
+    window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+  };
+  const skip = $('#skip');
+  skip.addEventListener('click', () => goTo(chaps[1] ? chaps[1].hold : .25));
+
+  const copyBtn = $('#copybtn');
+  copyBtn.addEventListener('click', () => {
+    const mailEl = $('#mail'), txt = mailEl.textContent;
+    const done = () => { copyBtn.textContent = 'Copied'; setTimeout(() => copyBtn.textContent = 'Copy email', 1600); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(mailEl); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    try { navigator.clipboard.writeText(txt).then(done, fallback); } catch (err) { fallback(); }
+  });
+
+  /* Grain tile */
+  try {
+    const gc = document.createElement('canvas'); gc.width = gc.height = 160;
+    const gg = gc.getContext('2d'), id = gg.createImageData(160, 160);
+    for (let i = 0; i < id.data.length; i += 4) { const v = Math.random() * 255; id.data[i] = id.data[i + 1] = id.data[i + 2] = v; id.data[i + 3] = 255; }
+    gg.putImageData(id, 0, 0);
+    $('.grain').style.backgroundImage = 'url(' + gc.toDataURL('image/png') + ')';
+  } catch (err) { /* grain is optional */ }
+
+  /* Scroll, pointer, loop */
+  let target = 0, cur = 0, t = 0, mx = 0, my = 0, tmx = 0, tmy = 0, prev = performance.now();
+  function readScroll() {
+    const r = track.getBoundingClientRect(), range = r.height - stage.offsetHeight;
+    target = range > 0 ? clamp(-r.top / range) : 0;
+  }
+  addEventListener('scroll', readScroll, { passive: true });
+  addEventListener('resize', () => { build(); fitWords(); readScroll(); });
+  if (finePointer && !reduce) {
+    addEventListener('pointermove', e => { tmx = (e.clientX / innerWidth - .5) * 2; tmy = (e.clientY / innerHeight - .5) * 2; }, { passive: true });
+  }
+
+  /* Video background: scroll position picks the frame.
+     The clip is cut into six shots, one per section. Each shot takes its own stretch of the footage and
+     frames it differently — scale and origin — so a section change reads as a cut to a new angle instead
+     of one long push-in. f0 and f1 are positions in the clip from 0 to 1; the last two shots run backwards
+     through it, which on a crane move reads as a slow rise. */
+  const vid = $('#vid'), vwrap = $('#vwrap'), shade = $('#shade'), grade = $('#grade'), tod = $('#tod');
+  let lastMin = -1;
+  const FPS = 24;
+  /* The clip runs once, continuously, across the whole scroll. Cutting it into shots made the section
+     boundaries jump, so instead the framing drifts: scale and origin ease between these keyframes with a
+     smoothstep, which reaches each section with its own look and never snaps. Columns: progress, scale,
+     origin x, origin y, horizontal offset in percent. */
+  const FRAMING = [
+    [0, 1.20, 50, 42, 6],
+    [.145, 1.05, 44, 46, 0],
+    [.365, 1.24, 32, 52, 0],
+    [.575, 1.42, 66, 38, 0],
+    [.775, 1.18, 48, 62, 0],
+    [.935, 1.50, 60, 30, 0],
+    [1.01, 1.30, 46, 48, 0]
+  ];
+  function framing(p) {
+    let i = 0;
+    while (i < FRAMING.length - 2 && p > FRAMING[i + 1][0]) i++;
+    const A = FRAMING[i], B = FRAMING[i + 1], k = sm(A[0], B[0], p);
+    return [A[1] + (B[1] - A[1]) * k, A[2] + (B[2] - A[2]) * k, A[3] + (B[3] - A[3]) * k, A[4] + (B[4] - A[4]) * k];
+  }
+  let lastOx = -1, lastOy = -1;
+  const seekTol = .5 / FPS;
+  /* A seek takes longer than one animation frame, and the old code simply skipped any frame where one was
+     still running. That dropped the positions scrolled past in between, so the picture advanced in uneven
+     jumps. Instead the latest wanted time is always kept here, and the moment a seek lands the next one is
+     issued from inside the handler — one frame sooner than waiting for the next repaint. The result is a
+     steady cadence at whatever rate the decoder can actually manage. */
+  let wantTime = -1;
+  function pushSeek() {
+    if (wantTime < 0 || !vdur || vid.seeking) return;
+    if (Math.abs(vid.currentTime - wantTime) <= seekTol) return;
+    try { vid.currentTime = wantTime; } catch (err) { /* not seekable yet */ }
+  }
+  let vdur = 0, vready = false;
+  vid.muted = true;
+  function setMode(m) {
+    if (m === mode) return;
+    mode = m;
+    vwrap.style.display = m === 'video' ? 'block' : 'none';
+    shade.style.display = m === 'video' ? 'block' : 'none';
+    grade.style.display = m === 'video' ? 'block' : 'none';
+  }
+  /* Read the state directly as well as from events: the video can finish loading before this script runs. */
+  const syncVideo = () => {
+    if (!vdur && vid.readyState >= 1 && vid.duration) vdur = vid.duration;
+    if (vid.readyState >= 3) vready = true;
+  };
+  ['loadedmetadata', 'loadeddata', 'canplay'].forEach(ev => vid.addEventListener(ev, syncVideo));
+  vid.addEventListener('seeked', pushSeek);
+  vid.addEventListener('error', () => setMode('canvas'));
+  syncVideo();
+  setTimeout(() => { syncVideo(); if (!vready && vid.readyState < 2) setMode('canvas'); }, 12000);
+  try { const pr = vid.play(); if (pr && pr.then) pr.then(() => vid.pause(), () => {}); } catch (err) { /* autoplay may be refused; scrubbing still works */ }
+
+  /* Soundscape (opt-in). Everything is synthesised in the browser with Web Audio, so there are no audio files to load.
+     Music: a slow pad whose chord changes with each section, plus sparse bell notes.
+     Ambience: wind, birds, rain, crickets and an owl, mixed by scroll position.
+     Effects: a whoosh at each section change, thunder after lightning, a chime run at the end. */
+  const snd = $('#snd');
+  let ac = null, master = null, musicBus = null, ambBus = null, sfxBus = null;
+  let rainGain = null, windGain = null, cricketGain = null, padFilter = null, bassOsc = null;
+  let padVoices = [], soundOn = false, lastMix = 0, lastP = 0, started = false;
+  if (reduce) snd.hidden = true;
+  const mtof = n => 440 * Math.pow(2, (n - 69) / 12);
+  /* One chord and one filter brightness per section. The progression is D minor, B flat, F, G minor,
+     C minor and back to D minor: consonant, and always moving between chords over several seconds so a
+     section change is felt rather than heard as an event. */
+  const CHORDS = [[38, 57, 62, 65, 69], [34, 53, 58, 62, 65], [41, 57, 60, 65, 69], [43, 58, 62, 65, 70], [36, 55, 60, 63, 67], [38, 57, 62, 65, 72]];
+  const BRIGHT = [900, 1150, 1500, 1050, 780, 980];
+
+  function noiseBuffer(sec, brown) {
+    const n = Math.floor(ac.sampleRate * sec), b = ac.createBuffer(1, n, ac.sampleRate), d = b.getChannelData(0);
+    let last = 0;
+    for (let i = 0; i < n; i++) {
+      const w = Math.random() * 2 - 1;
+      if (brown) { last = (last + .02 * w) / 1.02; d[i] = last * 3.5; } else d[i] = w;
+    }
+    return b;
+  }
+  function impulse(sec) {
+    const n = Math.floor(ac.sampleRate * sec), b = ac.createBuffer(2, n, ac.sampleRate);
+    for (let c = 0; c < 2; c++) {
+      const d = b.getChannelData(c);
+      for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 2.6);
+    }
+    return b;
+  }
+  function setChord(idx, instant) {
+    const ch = CHORDS[idx], t = ac.currentTime, tc = instant ? .01 : 3;
+    padVoices.forEach((v, i) => { const f = mtof(ch[i + 1]); v[0].frequency.setTargetAtTime(f, t, tc); v[1].frequency.setTargetAtTime(f, t, tc); });
+    bassOsc.frequency.setTargetAtTime(mtof(ch[0]), t, tc);
+    padFilter.frequency.setTargetAtTime(BRIGHT[idx], t, instant ? .01 : 3.4);
+  }
+  function startAudio() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return false;
+    try {
+      ac = new AC();
+      const comp = ac.createDynamicsCompressor(); comp.threshold.value = -16; comp.ratio.value = 4;
+      master = ac.createGain(); master.gain.value = 0; master.connect(comp); comp.connect(ac.destination);
+      musicBus = ac.createGain(); musicBus.gain.value = .4;
+      ambBus = ac.createGain(); sfxBus = ac.createGain();
+      ambBus.connect(master); sfxBus.connect(master);
+      const conv = ac.createConvolver(); conv.buffer = impulse(3.4);
+      const wet = ac.createGain(); wet.gain.value = .55;
+      musicBus.connect(master); musicBus.connect(conv); conv.connect(wet); wet.connect(master);
+
+      /* Pad: four voices through one slowly breathing low-pass filter. */
+      padFilter = ac.createBiquadFilter(); padFilter.type = 'lowpass'; padFilter.Q.value = .4; padFilter.frequency.value = BRIGHT[0];
+      const padGain = ac.createGain(); padGain.gain.value = .2; padFilter.connect(padGain); padGain.connect(musicBus);
+      const lfo = ac.createOscillator(), lfoG = ac.createGain(); lfo.frequency.value = .05; lfoG.gain.value = 180;
+      lfo.connect(lfoG); lfoG.connect(padFilter.frequency); lfo.start();
+      /* Sine and triangle only. A sawtooth in here is what makes a browser pad sound like a cheap synth. */
+      for (let i = 1; i <= 4; i++) {
+        const o1 = ac.createOscillator(), o2 = ac.createOscillator(), g = ac.createGain();
+        o1.type = 'triangle'; o2.type = 'sine'; o2.detune.value = i % 2 ? 6 : -6; g.gain.value = .34;
+        /* Each voice swells at its own slow rate, so the chord never sits perfectly still. */
+        const bl = ac.createOscillator(), blg = ac.createGain();
+        bl.frequency.value = .03 + i * .017; blg.gain.value = .13;
+        bl.connect(blg); blg.connect(g.gain); bl.start();
+        o1.connect(g); o2.connect(g); g.connect(padFilter); o1.start(); o2.start();
+        padVoices.push([o1, o2]);
+      }
+      bassOsc = ac.createOscillator(); bassOsc.type = 'sine';
+      const bg = ac.createGain(); bg.gain.value = .26; bassOsc.connect(bg); bg.connect(musicBus); bassOsc.start();
+      setChord(0, true);
+
+      /* wind */
+      const ws = ac.createBufferSource(); ws.buffer = noiseBuffer(4, false); ws.loop = true;
+      const wbp = ac.createBiquadFilter(); wbp.type = 'bandpass'; wbp.frequency.value = 520; wbp.Q.value = .9;
+      const wl = ac.createOscillator(), wlg = ac.createGain(); wl.frequency.value = .09; wlg.gain.value = 260;
+      wl.connect(wlg); wlg.connect(wbp.frequency); wl.start();
+      windGain = ac.createGain(); windGain.gain.value = 0; ws.connect(wbp); wbp.connect(windGain); windGain.connect(ambBus); ws.start();
+
+      /* rain */
+      const rs = ac.createBufferSource(); rs.buffer = noiseBuffer(3, false); rs.loop = true;
+      const rbp = ac.createBiquadFilter(); rbp.type = 'bandpass'; rbp.frequency.value = 3200; rbp.Q.value = .5;
+      rainGain = ac.createGain(); rainGain.gain.value = 0; rs.connect(rbp); rbp.connect(rainGain); rainGain.connect(ambBus); rs.start();
+
+      /* crickets: two pulsing high tones */
+      cricketGain = ac.createGain(); cricketGain.gain.value = 0; cricketGain.connect(ambBus);
+      [[4300, 16], [4700, 13]].forEach(pair => {
+        const o = ac.createOscillator(), am = ac.createGain(), l = ac.createOscillator(), lg = ac.createGain();
+        o.frequency.value = pair[0]; am.gain.value = .5; l.type = 'square'; l.frequency.value = pair[1]; lg.gain.value = .5;
+        l.connect(lg); lg.connect(am.gain); o.connect(am); am.connect(cricketGain); o.start(); l.start();
+      });
+      return true;
+    } catch (err) { ac = null; return false; }
+  }
+
+  function birds() {
+    setTimeout(birds, 1800 + Math.random() * 3500);
+    if (!soundOn || !ac || document.hidden) return;
+    const w = 1 - sm(.12, .3, lastP);
+    if (w < .1) return;
+    const n = 2 + Math.floor(Math.random() * 3), base = 2600 + Math.random() * 1800;
+    for (let k = 0; k < n; k++) {
+      const t = ac.currentTime + .05 + k * .14, o = ac.createOscillator(), g = ac.createGain();
+      o.type = 'sine'; o.frequency.setValueAtTime(base, t); o.frequency.exponentialRampToValueAtTime(base * (1.25 + Math.random() * .3), t + .09);
+      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.03 * w, t + .02); g.gain.exponentialRampToValueAtTime(.0001, t + .11);
+      o.connect(g); g.connect(ambBus); o.start(t); o.stop(t + .12);
+    }
+  }
+  function owl() {
+    setTimeout(owl, 9000 + Math.random() * 8000);
+    if (!soundOn || !ac || document.hidden) return;
+    const w = sm(.76, .9, lastP);
+    if (w < .2) return;
+    [0, .55].forEach((dt, k) => {
+      const t = ac.currentTime + .05 + dt, o = ac.createOscillator(), g = ac.createGain();
+      o.type = 'sine'; o.frequency.setValueAtTime(k ? 360 : 400, t); o.frequency.exponentialRampToValueAtTime(k ? 330 : 380, t + .4);
+      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.05 * w, t + .06); g.gain.exponentialRampToValueAtTime(.0001, t + .45);
+      o.connect(g); g.connect(ambBus); o.start(t); o.stop(t + .5);
+    });
+  }
+  function whoosh(up) {
+    const t = ac.currentTime + .02, s = ac.createBufferSource(); s.buffer = noiseBuffer(1.4, false);
+    const bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 1.2;
+    bp.frequency.setValueAtTime(up ? 250 : 2200, t); bp.frequency.exponentialRampToValueAtTime(up ? 2200 : 250, t + 1.1);
+    const g = ac.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.09, t + .5); g.gain.exponentialRampToValueAtTime(.0001, t + 1.3);
+    s.connect(bp); bp.connect(g); g.connect(sfxBus); s.start(t); s.stop(t + 1.4);
+    const b = ac.createOscillator(), bg = ac.createGain(); b.type = 'sine';
+    b.frequency.setValueAtTime(70, t); b.frequency.exponentialRampToValueAtTime(34, t + .9);
+    bg.gain.setValueAtTime(.0001, t); bg.gain.exponentialRampToValueAtTime(.17, t + .05); bg.gain.exponentialRampToValueAtTime(.0001, t + 1);
+    b.connect(bg); bg.connect(sfxBus); b.start(t); b.stop(t + 1.05);
+  }
+  function thunder() {
+    if (!soundOn || !ac) return;
+    const t0 = ac.currentTime + .35 + Math.random() * .9;
+    const src = ac.createBufferSource(); src.buffer = noiseBuffer(4, true);
+    const lp = ac.createBiquadFilter(); lp.type = 'lowpass';
+    lp.frequency.setValueAtTime(260, t0); lp.frequency.exponentialRampToValueAtTime(70, t0 + 3.5);
+    const g = ac.createGain(); g.gain.setValueAtTime(.0001, t0);
+    g.gain.exponentialRampToValueAtTime(.55, t0 + .15); g.gain.setTargetAtTime(.0001, t0 + .5, 1);
+    src.connect(lp); lp.connect(g); g.connect(sfxBus); src.start(t0); src.stop(t0 + 4);
+    const c = ac.createBufferSource(); c.buffer = noiseBuffer(.4, false);
+    const bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 900; bp.Q.value = .7;
+    const cg = ac.createGain(); cg.gain.setValueAtTime(.35, t0); cg.gain.exponentialRampToValueAtTime(.0001, t0 + .25);
+    c.connect(bp); bp.connect(cg); cg.connect(sfxBus); c.start(t0); c.stop(t0 + .4);
+  }
+  function onChapter(idx, prev) {
+    if (!soundOn || !ac || prev < 0) return;
+    setChord(idx); whoosh(idx > prev);
+  }
+  function soundMix(p, now) {
+    lastP = p;
+    if (!soundOn || !ac || now - lastMix < 100) return;
+    lastMix = now;
+    const t = ac.currentTime;
+    windGain.gain.setTargetAtTime(.05 * (1 - sm(.25, .65, p)) + .012, t, .4);
+    rainGain.gain.setTargetAtTime(.07 * bump(p, .58, .18), t, .4);
+    cricketGain.gain.setTargetAtTime(.02 * sm(.74, .9, p), t, .6);
+  }
+  snd.addEventListener('click', () => {
+    if (!ac && !startAudio()) return;
+    soundOn = !soundOn; snd.classList.add('seen');
+    snd.setAttribute('aria-pressed', String(soundOn)); snd.textContent = soundOn ? 'Sound on' : 'Sound off';
+    if (ac.state === 'suspended') ac.resume();
+    const t = ac.currentTime;
+    master.gain.cancelScheduledValues(t); master.gain.setTargetAtTime(soundOn ? .9 : 0, t, soundOn ? .9 : .25);
+    if (soundOn) {
+      setChord(Math.max(0, activeIdx), true);
+      if (!started) { started = true; birds(); owl(); }
+    }
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (!ac) return;
+    if (document.hidden) ac.suspend(); else if (soundOn) ac.resume();
+  });
+
+  function frame(now) {
+    const dt = Math.min(.05, (now - prev) / 1000); prev = now;
+    if (!reduce) t += dt;
+    cur = reduce ? target : cur + (target - cur) * (1 - Math.exp(-dt * 9));
+    if (Math.abs(target - cur) < 1e-5) cur = target;
+    mx += (tmx - mx) * (1 - Math.exp(-dt * 4)); my += (tmy - my) * (1 - Math.exp(-dt * 4));
+
+    if (mode === 'video') {
+      syncVideo();
+      if (vdur) {
+        const nf = Math.max(1, Math.round(vdur * FPS));
+        const fr = clamp(Math.round(cur * (nf - 1)), 0, nf - 1);
+        wantTime = Math.min(vdur - .02, (fr + .5) / FPS);
+        pushSeek();
+      }
+      const fm = framing(cur), ox = Math.round(fm[1] * 10) / 10, oy = Math.round(fm[2] * 10) / 10;
+      if (ox !== lastOx || oy !== lastOy) { vwrap.style.transformOrigin = ox + '% ' + oy + '%'; lastOx = ox; lastOy = oy; }
+      vwrap.style.transform = 'translate3d(' + fm[3].toFixed(2) + '%,0,0) scale(' + fm[0].toFixed(4) + ')';
+      shade.style.opacity = (.40 * sm(.52, 1, cur)).toFixed(3);
+      grade.style.background = rgba(ramp(TOD, cur));
+    }
+    render(cur, t, dt);
+    const acc = ramp(ACC, cur);
+    stage.style.setProperty('--accent-rgb', (acc[0] | 0) + ',' + (acc[1] | 0) + ',' + (acc[2] | 0));
+    chaps.forEach(c => updateChap(c, cur, mx, my));
+
+    bar.style.transform = 'scaleX(' + cur.toFixed(4) + ')';
+    const alt = Math.round(ALT_TOP * (1 - cur) / 10) * 10;
+    if (alt !== lastAlt) { altv.textContent = fmt(alt); lastAlt = alt; }
+    const mins = Math.round(ramp(CLOCK, cur)[0]);
+    if (mins !== lastMin) { lastMin = mins; tod.textContent = todLabel(mins, cur); }
+    soundMix(cur, now);
+    const ho = 1 - clamp(cur / .03);
+    hint.style.opacity = ho.toFixed(2);
+    skip.style.pointerEvents = ho > .12 ? 'auto' : 'none';
+    let idx = 0, best = 9;
+    chaps.forEach((c, i) => { const d = Math.abs(cur - c.hold); if (d < best) { best = d; idx = i; } });
+    if (idx !== activeIdx) { railBtns.forEach((b, i) => b.classList.toggle('on', i === idx)); const pv = activeIdx; activeIdx = idx; onChapter(idx, pv); }
+    requestAnimationFrame(frame);
+  }
+
+  build(); fitWords(); readScroll(); cur = target;
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWords);
+  requestAnimationFrame(frame);
+})();
+</script>
