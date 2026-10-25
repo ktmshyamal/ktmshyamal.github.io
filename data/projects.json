@@ -2,6 +2,17 @@
   "_note": "Projects shown in the Work section, in display order. scripts/sync_behance.py adds new Behance projects at the top automatically. Set \"hidden\": true on a project to leave it off the site.",
   "projects": [
     {
+      "id": "232567325",
+      "title": "LinkdIn Post",
+      "kind": "Social media",
+      "category": "social",
+      "url": "https://www.behance.net/gallery/232567325/LinkdIn-Post",
+      "image": "assets/work/linkdin-post.jpg",
+      "alt": "LinkdIn Post",
+      "published": "2025-08-15",
+      "source": "behance"
+    },
+    {
       "id": "239346439",
       "title": "Maliban",
       "kind": "Creative ads",
