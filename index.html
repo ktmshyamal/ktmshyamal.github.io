@@ -613,7 +613,7 @@ h2 em{display:inline-block;will-change:transform}
       for (const e of ems) {
         const d = (e.c - sy - vh / 2) / vh;
         if (d < -1.2 || d > 1.2) continue;
-        const x = Math.round(d * 30);
+        const x = Math.round((d + 1.2) * 10);  /* 0 to 24 px, always to the right, so the space before the word never closes */
         if (x !== e.x) { e.x = x; e.el.style.transform = 'translate3d(' + x + 'px,0,0)'; }
       }
       /* Word band: a slow drift, pushed along by scrolling in either direction. */
