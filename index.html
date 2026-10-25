@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 :root{
-  /* Layout: a calm page on a centred 1240px container. The summit-to-forest footage plays inside a rounded hero frame with a white margin; below come an intro with real numbers, four service cards, a filterable three-column work grid, a worked-with row and a soft gradient contact panel. One committed light look: lavender white, plum ink, a single amber accent taken from the summit sun. */
+  /* Layout: a calm page on a centred 1240px container. The hero film plays inside a rounded frame with a white margin; below come an intro with real numbers, four service cards, a filterable three-column work grid, a worked-with row and a soft gradient contact panel. One committed light look: lavender white, plum ink, a single amber accent. */
   --bg:#f7f5f9;
   --surface:#ffffff;
   --lav:#efe9f5;
@@ -372,7 +372,7 @@ h2 em{display:inline-block;will-change:transform}
   'use strict';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Hero video: a soft dip at the loop point so the forest does not cut straight back to the summit, a pause button, and no autoplay for reduced motion. */
+  /* Hero video: a soft dip at the loop point so the end of the film does not cut straight back to its start, a pause button, and no autoplay for reduced motion. */
   const v = document.getElementById('hv'), vb = document.getElementById('vbtn'), fade = document.getElementById('vfade');
   const PAUSE = '<svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1.5" width="3.4" height="11" rx="1" fill="currentColor"/><rect x="8.6" y="1.5" width="3.4" height="11" rx="1" fill="currentColor"/></svg>';
   const PLAY = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.6.6 0 0 0 .9.5l8.6-5.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>';
