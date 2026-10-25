@@ -1,0 +1,137 @@
+{
+  "_note": "Projects shown in the Work section, in display order. scripts/sync_behance.py adds new Behance projects at the top automatically. Set \"hidden\": true on a project to leave it off the site.",
+  "projects": [
+    {
+      "id": "239346439",
+      "title": "Maliban",
+      "kind": "Creative ads",
+      "category": "branding",
+      "url": "https://www.behance.net/gallery/239346439/Creative-Ads",
+      "image": "assets/work/maliban-creative-ads.jpg",
+      "alt": "Maliban Chocolate Puff social ad",
+      "published": "2025-11-26",
+      "source": "curated"
+    },
+    {
+      "id": "249684367",
+      "title": "Chase the View",
+      "kind": "YouTube intro collection",
+      "category": "motion",
+      "url": "https://www.behance.net/gallery/249684367/Cinematic-YouTube-Intro-Collection",
+      "image": "assets/work/chase-the-view.jpg",
+      "alt": "Chase the View cinematic YouTube intro",
+      "published": "2026-05-23",
+      "source": "curated"
+    },
+    {
+      "id": "243425887",
+      "title": "HIGER V Series",
+      "kind": "Launch film",
+      "category": "automotive",
+      "url": "https://www.behance.net/gallery/243425887/HIGER-V-Series-Cinematic-Bus-Launch",
+      "image": "assets/work/higer-v-series.jpg",
+      "alt": "HIGER V Series cinematic bus launch",
+      "published": "2026-02-03",
+      "source": "curated"
+    },
+    {
+      "id": "256891937",
+      "title": "DSI Footwear",
+      "kind": "Social media posts",
+      "category": "social",
+      "url": "https://www.behance.net/gallery/256891937/DSI-(U-Soft-Footwear)-Social-Media-Posts",
+      "image": "assets/work/dsi-footwear.jpg",
+      "alt": "DSI U Soft footwear social post: casual wear versus office wear",
+      "published": "2026-10-09",
+      "source": "curated"
+    },
+    {
+      "id": "246125047",
+      "title": "DGH Technologies",
+      "kind": "Corporate profile",
+      "category": "branding",
+      "url": "https://www.behance.net/gallery/246125047/Corporate-profile",
+      "image": "assets/work/dgh-corporate-profile.jpg",
+      "alt": "DGH Technologies corporate profile brochure",
+      "published": "2026-03-20",
+      "source": "curated"
+    },
+    {
+      "id": "244777685",
+      "title": "N-Joy",
+      "kind": "Product story ad",
+      "category": "motion",
+      "url": "https://www.behance.net/gallery/244777685/Cinematic-Product-Story-Advertisement",
+      "image": "assets/work/njoy-product-story.jpg",
+      "alt": "N-Joy cinematic product story advertisement",
+      "published": "2026-03-05",
+      "source": "curated"
+    },
+    {
+      "id": "244721451",
+      "title": "Micro × HIGER",
+      "kind": "Fleet campaign",
+      "category": "automotive",
+      "url": "https://www.behance.net/gallery/244721451/Micro",
+      "image": "assets/work/micro-higer-fleet.jpg",
+      "alt": "Micro Cars and HIGER bus fleet campaign",
+      "published": "2026-03-06",
+      "source": "curated"
+    },
+    {
+      "id": "224676987",
+      "title": "Queen Kuweni",
+      "kind": "Heritage campaign",
+      "category": "social",
+      "url": "https://www.behance.net/gallery/224676987/Social-Media-Project",
+      "image": "assets/work/queen-kuweni.jpg",
+      "alt": "Queen Kuweni artisan heritage campaign visual",
+      "published": "",
+      "source": "curated"
+    },
+    {
+      "id": "231221595",
+      "title": "Vigilant Security",
+      "kind": "Social campaign",
+      "category": "branding",
+      "url": "https://www.behance.net/gallery/231221595/Social-Media-Vigilant",
+      "image": "assets/work/vigilant-security.jpg",
+      "alt": "Vigilant Security social media campaign",
+      "published": "2025-07-26",
+      "source": "curated"
+    },
+    {
+      "id": "246134649",
+      "title": "Motion graphics",
+      "kind": "Animated illustration",
+      "category": "motion",
+      "url": "https://www.behance.net/gallery/246134649/MotionGraphics",
+      "image": "assets/work/motion-graphics.jpg",
+      "alt": "Illustrated character for a motion graphics piece",
+      "published": "2026-03-20",
+      "source": "curated"
+    },
+    {
+      "id": "232128791",
+      "title": "BYD × AMG",
+      "kind": "Poster series",
+      "category": "automotive",
+      "url": "https://www.behance.net/gallery/232128791/Automotive-Design",
+      "image": "assets/work/byd-amg-posters.jpg",
+      "alt": "BYD and Mercedes-AMG automotive posters",
+      "published": "2025-08-09",
+      "source": "curated"
+    },
+    {
+      "id": "232348877",
+      "title": "Social Media",
+      "kind": "3D character",
+      "category": "social",
+      "url": "https://www.behance.net/gallery/232348877/Social-Media-Project",
+      "image": "assets/work/social-media-3d.jpg",
+      "alt": "3D character for a social media series",
+      "published": "2025-08-12",
+      "source": "curated"
+    }
+  ]
+}

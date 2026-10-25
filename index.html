@@ -141,6 +141,7 @@ h2 em{display:inline-block;will-change:transform}
 .filters button[aria-pressed="true"]{background:var(--ink);color:#fff}
 .count{margin:8px 0 0;font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.card[hidden]{display:none}
 .card{display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:var(--r-md);background:var(--surface);text-decoration:none;color:var(--ink);transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
 .card:hover{transform:translateY(-3px);box-shadow:0 22px 40px -26px rgba(39,29,49,.45)}
 .ph{position:relative;display:block;overflow:hidden;border-radius:var(--r-sm);aspect-ratio:1.28;max-width:100%;background:var(--lav)}
@@ -270,25 +271,25 @@ h2 em{display:inline-block;will-change:transform}
           <h3>Branding</h3>
           <p>Identity, print and campaign visuals for brands in Sri Lanka and abroad.</p>
           <ul class="tags"><li>Illustrator</li><li>Photoshop</li><li>Print</li></ul>
-          <button class="svc-go" type="button" data-show="branding"><span>See 3 projects</span><span class="arr" aria-hidden="true">→</span></button>
+          <button class="svc-go" type="button" data-show="branding"><span>See projects</span><span class="arr" aria-hidden="true">→</span></button>
         </article>
         <article class="svc">
           <h3>Motion</h3>
           <p>YouTube intros, motion graphics and product stories, edited and animated end to end.</p>
           <ul class="tags"><li>After Effects</li><li>Premiere Pro</li><li>CapCut</li></ul>
-          <button class="svc-go" type="button" data-show="motion"><span>See 3 projects</span><span class="arr" aria-hidden="true">→</span></button>
+          <button class="svc-go" type="button" data-show="motion"><span>See projects</span><span class="arr" aria-hidden="true">→</span></button>
         </article>
         <article class="svc">
           <h3>Automotive</h3>
           <p>Launch films, fleet campaigns and poster work for vehicle brands.</p>
           <ul class="tags"><li>Launch film</li><li>Campaign</li><li>Poster</li></ul>
-          <button class="svc-go" type="button" data-show="automotive"><span>See 3 projects</span><span class="arr" aria-hidden="true">→</span></button>
+          <button class="svc-go" type="button" data-show="automotive"><span>See projects</span><span class="arr" aria-hidden="true">→</span></button>
         </article>
         <article class="svc">
           <h3>AI &amp; Social</h3>
           <p>AI-assisted imagery and social content, from the first prompt to the finished post.</p>
           <ul class="tags"><li>AI imagery</li><li>3D</li><li>Social</li></ul>
-          <button class="svc-go" type="button" data-show="social"><span>See 3 projects</span><span class="arr" aria-hidden="true">→</span></button>
+          <button class="svc-go" type="button" data-show="social"><span>See projects</span><span class="arr" aria-hidden="true">→</span></button>
         </article>
     </div>
   </section>
@@ -297,7 +298,7 @@ h2 em{display:inline-block;will-change:transform}
 
   <section class="wrap" id="work">
     <div class="sec-head">
-      <div><p class="eyebrow">Selected work</p><h2>Recent <em>projects</em></h2><p class="count" id="count" aria-live="polite">12 projects</p></div>
+      <div><p class="eyebrow">Selected work</p><h2>Recent <em>projects</em></h2><p class="count" id="count" aria-live="polite">Projects</p></div>
       <div class="filters" role="group" aria-label="Filter projects">
         <button type="button" data-f="all" aria-pressed="true">All</button>
         <button type="button" data-f="branding" aria-pressed="false">Branding</button>
@@ -307,6 +308,7 @@ h2 em{display:inline-block;will-change:transform}
       </div>
     </div>
     <div class="grid" id="grid">
+<!-- WORK:START · generated from data/projects.json by scripts/sync_behance.py -->
         <a class="card" data-cat="branding" href="https://www.behance.net/gallery/239346439/Creative-Ads" target="_blank" rel="noopener" aria-label="Maliban, Creative ads. Opens on Behance.">
           <span class="ph"><img src="assets/work/maliban-creative-ads.jpg" alt="Maliban Chocolate Puff social ad" loading="lazy" decoding="async" width="808" height="632"><span class="tag">Branding</span></span>
           <span class="meta"><span class="mt"><b>Maliban</b><i>Creative ads</i></span><span class="arr" aria-hidden="true">↗</span></span>
@@ -355,8 +357,9 @@ h2 em{display:inline-block;will-change:transform}
           <span class="ph"><img src="assets/work/social-media-3d.jpg" alt="3D character for a social media series" loading="lazy" decoding="async" width="808" height="632"><span class="tag">AI &amp; Social</span></span>
           <span class="meta"><span class="mt"><b>Social Media</b><i>3D character</i></span><span class="arr" aria-hidden="true">↗</span></span>
         </a>
+<!-- WORK:END -->
     </div>
-    <p class="more"><a class="pill dark mag" href="https://www.behance.net/ktmshyamal" target="_blank" rel="noopener"><span class="dot" aria-hidden="true">↗</span>All 24 projects on Behance</a></p>
+    <p class="more"><a class="pill dark mag" href="https://www.behance.net/ktmshyamal" target="_blank" rel="noopener"><span class="dot" aria-hidden="true">↗</span>All projects on Behance</a></p>
   </section>
 
   <section class="wrap clients" aria-labelledby="ww">
@@ -417,6 +420,13 @@ h2 em{display:inline-block;will-change:transform}
     count.textContent = n + (n === 1 ? ' project' : ' projects');
   }
   chips.forEach(b => b.addEventListener('click', () => setFilter(b.dataset.f)));
+  count.textContent = cards.length + (cards.length === 1 ? ' project' : ' projects');
+  /* Service buttons show how many projects are in their category, so new Behance projects are counted automatically. */
+  document.querySelectorAll('.svc-go[data-show]').forEach(b => {
+    const n = cards.filter(c => c.dataset.cat === b.dataset.show).length;
+    b.firstElementChild.textContent = 'See ' + n + (n === 1 ? ' project' : ' projects');
+    b.hidden = n === 0;
+  });
   document.querySelectorAll('[data-show]').forEach(b => b.addEventListener('click', () => {
     setFilter(b.dataset.show);
     document.getElementById('work').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
