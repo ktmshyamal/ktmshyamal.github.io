@@ -277,6 +277,40 @@ h2 em{display:inline-block;will-change:transform}
   .nav .pill span:last-child{display:none}
   .nav .pill{padding:5px}
 }
+/* Phones: the film keeps its full 16:9 frame, exactly as on a laptop, instead of being cropped to fill a tall screen.
+   The menu sits above the film and the headline below it, on the page background. */
+/* Media protection: no right-click saving, dragging out or long-press saving of images and films. */
+img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.logo .li{display:none}
+@media (max-width:700px){
+  .hero{display:grid;grid-template-areas:"nav" "frame" "copy";height:auto;min-height:0;margin-top:0;border-radius:0;overflow:visible;isolation:auto;background:transparent;color:var(--ink)}
+  .nav{position:relative;grid-area:nav;padding:14px 0 12px}
+  .logo{color:var(--ink)}
+  .logo .lw{display:none}.logo .li{display:block}
+  .nav .pill{background:var(--ink);color:#fff}
+  .hero video,.hero .shade,.hero .vfade,.hero-foot{grid-area:frame;position:relative;inset:auto}
+  .hero video{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r-md);background:#2b2236;transform:none!important}
+  .hero .shade{border-radius:var(--r-md);background:linear-gradient(180deg,rgba(28,20,36,0) 55%,rgba(28,20,36,.45) 100%)}
+  .hero .vfade{border-radius:var(--r-md)}
+  .hero-foot{align-self:end;padding:10px}
+  .hero-foot .sbtn{height:34px;padding:0 12px 0 10px}
+  .hero-foot .vbtn{width:34px;height:34px}
+  .hero-copy{grid-area:copy;position:relative;left:auto;top:auto;transform:none;width:auto;text-align:left;padding:26px 2px 0}
+  .hc-in{transform:none!important;opacity:1!important}
+  h1{font-size:clamp(42px,13vw,60px);text-shadow:none}
+  .hero-sub{margin:14px 0 24px;color:var(--muted);text-shadow:none}
+  .hero-ctas{justify-content:flex-start}
+  .hero-ctas .pill{background:var(--ink);color:#fff}
+  .hero-ctas .textlink{color:var(--ink);border-color:rgba(39,29,49,.35)}
+}
+/* Phones held sideways: a full 16:9 frame too, with the headline over the film as on a laptop. */
+@media (min-width:701px) and (max-height:520px) and (orientation:landscape){
+  .hero{height:auto;min-height:0;aspect-ratio:16/9}
+  .hero video{object-fit:cover}
+  h1{font-size:clamp(36px,6.4vw,60px)}
+  .hero-sub{margin:12px auto 18px;font-size:14px}
+  .hero-foot .chip{display:none}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .rise{animation:none}
@@ -293,7 +327,7 @@ h2 em{display:inline-block;will-change:transform}
   <div class="shade"></div>
   <div class="vfade" id="vfade"></div>
   <nav class="nav" aria-label="Main">
-    <a class="logo" href="#top"><img src="assets/brand/logo-white.png" alt="" width="253" height="200">Gayan Shyamal</a>
+    <a class="logo" href="#top"><img class="lw" src="assets/brand/logo-white.png" alt="" width="253" height="200"><img class="li" src="assets/brand/logo-ink.png" alt="" width="253" height="200">Gayan Shyamal</a>
     <ul><li><a href="#work">Work</a></li><li><a href="#films">Films</a></li><li><a href="#services">Services</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
     <a class="pill mag" href="#contact"><span class="dot" aria-hidden="true">✦</span><span>Get in touch</span></a>
   </nav>
@@ -662,6 +696,11 @@ h2 em{display:inline-block;will-change:transform}
   }
 
   document.getElementById('yr').textContent = new Date().getFullYear();
+  /* Media protection: block the browser's save menu and dragging for every image and film. */
+  const isMedia = t => t && t.closest && t.closest('img, video, .ft, .pstage, .cimg, .ph');
+  document.addEventListener('contextmenu', e => { if (isMedia(e.target)) e.preventDefault(); });
+  document.addEventListener('dragstart', e => { if (isMedia(e.target)) e.preventDefault(); });
+
   /* Films & stills */
   const fgrid = document.getElementById('fgrid');
   if (fgrid) {
@@ -708,6 +747,7 @@ h2 em{display:inline-block;will-change:transform}
       if (t.dataset.kind === 'film') {
         el = document.createElement('video');
         el.src = t.dataset.full; el.poster = t.dataset.poster; el.controls = true; el.playsInline = true; el.autoplay = true; el.preload = 'auto';
+        el.setAttribute('controlslist', 'nodownload noplaybackrate noremoteplayback'); el.disablePictureInPicture = true; el.disableRemotePlayback = true;
         el.setAttribute('aria-label', t.dataset.title);
         el.addEventListener('ended', () => show(idx + 1));
       } else {
