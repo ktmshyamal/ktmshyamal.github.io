@@ -181,6 +181,72 @@ h2 em{display:inline-block;will-change:transform}
 .fbrand{display:flex;align-items:center;gap:12px}
 .fbrand img{flex:none;width:auto;height:26px}
 
+/* Films & stills: a mosaic of personal films and photos. Films preview silently on hover (or when scrolled into view on touch screens) and open in a full-screen player with sound. */
+.fgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(180px,20vw,270px);grid-auto-flow:row dense;gap:12px}
+.ft{position:relative;display:block;padding:0;border:0;border-radius:var(--r-md);overflow:hidden;background:#1d1626;color:#fff;text-align:left;cursor:pointer;isolation:isolate;
+  transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
+.ft.w2{grid-column:span 2}.ft.w3{grid-column:span 3}.ft.h2{grid-row:span 2}
+.ft img,.ft video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1),opacity .5s}
+.ft video{opacity:0}
+.ft.playing video{opacity:1}
+.ft::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,14,28,.28) 0%,transparent 26%,transparent 52%,rgba(20,14,28,.72) 100%);pointer-events:none}
+.ft .chip2{position:absolute;z-index:2;top:12px;left:12px;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:500 10.5px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.ft .cap{position:absolute;z-index:2;left:16px;right:16px;bottom:14px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.ft .cap b{display:block;font-weight:500;font-size:clamp(17px,1.6vw,22px);line-height:1.15;letter-spacing:-.02em}
+.ft .cap i{display:block;margin-top:4px;font:500 11px/1.2 var(--f-mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+.ft .pl{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--ink);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.ft .pl svg{width:14px;height:14px}
+.ft.feat .cap b{font-family:var(--f-serif);font-style:italic;font-weight:400;font-size:clamp(28px,3.4vw,48px);letter-spacing:-.01em}
+.ft.feat .pl{width:56px;height:56px}
+@media (hover:hover) and (pointer:fine){
+  .ft:hover img,.ft:hover video{transform:scale(1.04)}
+  .ft:hover .pl{transform:scale(1.08)}
+  .fgrid.cursor .ft{cursor:none}
+  .fgrid.cursor .ft .pl{opacity:0}
+}
+.fcur{position:fixed;z-index:30;left:0;top:0;pointer-events:none;display:inline-flex;align-items:center;gap:8px;padding:10px 16px 10px 12px;border-radius:999px;background:#fff;color:var(--ink);
+  font:500 12px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;box-shadow:0 10px 30px rgba(20,14,28,.25);opacity:0;transition:opacity .25s}
+.fcur.on{opacity:1}
+.fcur svg{width:12px;height:12px}
+
+/* Player */
+.player{width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(16,11,22,.94);color:#fff;overflow:hidden}
+.player::backdrop{background:rgba(16,11,22,.6);backdrop-filter:blur(6px)}
+.player[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+.pbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:max(14px,env(safe-area-inset-top,0px)) clamp(14px,3vw,28px) 10px}
+.pcount{font:500 11px/1 var(--f-mono);letter-spacing:.14em;color:rgba(255,255,255,.7)}
+.pbtn{border:0;cursor:pointer;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.12);color:#fff;transition:background .2s}
+.pbtn:hover{background:rgba(255,255,255,.24)}
+.pbtn svg{width:16px;height:16px}
+.pbtn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.pstage{position:relative;display:grid;place-items:center;padding:0 clamp(8px,6vw,96px);min-height:0}
+.pstage video,.pstage img{max-width:100%;max-height:100%;width:auto;height:auto;border-radius:var(--r-sm);background:#000;box-shadow:0 30px 80px rgba(0,0,0,.45);animation:pin .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes pin{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+.pnav{position:absolute;top:50%;translate:0 -50%}
+.pnav.prev{left:clamp(8px,2vw,24px)}.pnav.next{right:clamp(8px,2vw,24px)}
+.pcap{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:4px 14px;padding:14px 20px max(18px,env(safe-area-inset-bottom,0px));text-align:center}
+.pcap b{font-family:var(--f-serif);font-style:italic;font-weight:400;font-size:clamp(22px,2.4vw,30px);letter-spacing:-.01em}
+.pcap span{font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+@media (max-width:900px){
+  .fgrid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:clamp(170px,30vw,250px)}
+  .ft.w3{grid-column:span 2}
+  .ft.uw{grid-column:span 1;grid-row:span 2}
+  .ft.uw img{object-position:42% center}
+}
+@media (max-width:700px){
+  .fgrid{grid-auto-rows:clamp(150px,48vw,240px);gap:10px}
+  .ft.feat{grid-row:span 1}
+  .ft .cap{left:12px;right:12px;bottom:11px}
+  .ft .pl{width:34px;height:34px}
+  .ft.feat .pl{width:44px;height:44px}
+  .ft:not(.feat) .cap i{display:none}
+  .pnav{display:none}
+  .pstage{padding:0 8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ft,.ft img,.ft video,.pstage video,.pstage img{transition:none;animation:none}
+}
+
 @media (max-width:1060px){
   .svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .svc{min-height:260px}
@@ -228,7 +294,7 @@ h2 em{display:inline-block;will-change:transform}
   <div class="vfade" id="vfade"></div>
   <nav class="nav" aria-label="Main">
     <a class="logo" href="#top"><img src="assets/brand/logo-white.png" alt="" width="253" height="200">Gayan Shyamal</a>
-    <ul><li><a href="#work">Work</a></li><li><a href="#services">Services</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
+    <ul><li><a href="#work">Work</a></li><li><a href="#films">Films</a></li><li><a href="#services">Services</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
     <a class="pill mag" href="#contact"><span class="dot" aria-hidden="true">✦</span><span>Get in touch</span></a>
   </nav>
   <div class="hero-copy"><div class="hc-in" id="hcin">
@@ -264,7 +330,7 @@ h2 em{display:inline-block;will-change:transform}
   <section class="wrap" id="services">
     <div class="sec-head">
       <div><p class="eyebrow">Services</p><h2>What I <em>make</em></h2></div>
-      <p class="note">Four kinds of work, each with three projects below. Pick one to jump straight to them.</p>
+      <p class="note">Four kinds of work. Pick one to jump straight to its projects.</p>
     </div>
     <div class="svc-grid">
         <article class="svc">
@@ -366,6 +432,45 @@ h2 em{display:inline-block;will-change:transform}
     <p class="more"><a class="pill dark mag" href="https://www.behance.net/ktmshyamal" target="_blank" rel="noopener"><span class="dot" aria-hidden="true">↗</span>All projects on Behance</a></p>
   </section>
 
+  <section class="wrap" id="films">
+    <div class="sec-head">
+      <div><p class="eyebrow">Films &amp; stills</p><h2>Stories in <em>motion</em></h2></div>
+      <p class="note">Personal films and photographs made between client projects. Open any piece to watch it full screen, with sound.</p>
+    </div>
+    <div class="fgrid" id="fgrid">
+      <button class="ft feat w3 h2" type="button" data-kind="film" data-full="assets/films/unforgettable-sri-lanka.mp4" data-poster="assets/films/unforgettable-sri-lanka-poster.jpg" data-title="Unforgettable Sri Lanka" data-meta="Short film · 1:15" aria-label="Play Unforgettable Sri Lanka, Short film, 1:15, with sound">
+        <img src="assets/films/unforgettable-sri-lanka-poster.jpg" alt="Golden grassland at sunset, from a short film with the GS mark" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="assets/films/unforgettable-sri-lanka-preview.mp4" aria-hidden="true" tabindex="-1"></video>
+        <span class="chip2" aria-hidden="true">Short film</span>
+        <span class="cap" aria-hidden="true"><span><b>Unforgettable Sri Lanka</b><i>Short film · 1:15</i></span><span class="pl"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.6.6 0 0 0 .9.5l8.6-5.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg></span></span>
+      </button>
+      <button class="ft h2" type="button" data-kind="film" data-full="assets/films/grass-portal.mp4" data-poster="assets/films/grass-portal-poster.jpg" data-title="Field portal" data-meta="Vertical reel · 0:17" aria-label="Play Field portal, Vertical reel, 0:17, with sound">
+        <img src="assets/films/grass-portal-poster.jpg" alt="A glowing portal line sweeping over a flower meadow" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="assets/films/grass-portal-preview.mp4" aria-hidden="true" tabindex="-1"></video>
+        <span class="chip2" aria-hidden="true">Reel</span>
+        <span class="cap" aria-hidden="true"><span><b>Field portal</b><i>Vertical reel · 0:17</i></span><span class="pl"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.6.6 0 0 0 .9.5l8.6-5.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg></span></span>
+      </button>
+      <button class="ft h2" type="button" data-kind="film" data-full="assets/films/ai-portrait.mp4" data-poster="assets/films/ai-portrait-poster.jpg" data-title="Prompt to portrait" data-meta="AI process · 0:12" aria-label="Play Prompt to portrait, AI process, 0:12, with sound">
+        <img src="assets/films/ai-portrait-poster.jpg" alt="A man in black with red sunglasses walking through a park" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="assets/films/ai-portrait-preview.mp4" aria-hidden="true" tabindex="-1"></video>
+        <span class="chip2" aria-hidden="true">AI reel</span>
+        <span class="cap" aria-hidden="true"><span><b>Prompt to portrait</b><i>AI process · 0:12</i></span><span class="pl"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.6.6 0 0 0 .9.5l8.6-5.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg></span></span>
+      </button>
+      <button class="ft w2" type="button" data-kind="film" data-full="assets/films/mountain-portal.mp4" data-poster="assets/films/mountain-portal-poster.jpg" data-title="The doorway" data-meta="Short film · 0:24" aria-label="Play The doorway, Short film, 0:24, with sound">
+        <img src="assets/films/mountain-portal-poster.jpg" alt="A man walking towards a stone doorway above a sea of clouds" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="assets/films/mountain-portal-preview.mp4" aria-hidden="true" tabindex="-1"></video>
+        <span class="chip2" aria-hidden="true">Short film</span>
+        <span class="cap" aria-hidden="true"><span><b>The doorway</b><i>Short film · 0:24</i></span><span class="pl"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.6.6 0 0 0 .9.5l8.6-5.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg></span></span>
+      </button>
+      <button class="ft h2" type="button" data-kind="still" data-full="assets/films/pine-forest.jpg" data-title="Pine trail" data-meta="Photograph" aria-label="View Pine trail, photograph">
+        <img src="assets/films/pine-forest.jpg" alt="Gayan with a backpack and camera pole in a tall pine forest, looking up" loading="lazy" decoding="async">
+        <span class="chip2" aria-hidden="true">Still</span>
+        <span class="cap" aria-hidden="true"><span><b>Pine trail</b><i>Photograph</i></span><span class="pl"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 5V2h3M12 5V2H9M2 9v3h3M12 9v3H9" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></span></span>
+      </button>
+      <button class="ft w2 uw" type="button" data-kind="still" data-full="assets/films/underwater.jpg" data-title="Under the surface" data-meta="Photograph" aria-label="View Under the surface, photograph">
+        <img src="assets/films/underwater.jpg" alt="A scuba diver beside a wreck with a school of silver fish" loading="lazy" decoding="async">
+        <span class="chip2" aria-hidden="true">Still</span>
+        <span class="cap" aria-hidden="true"><span><b>Under the surface</b><i>Photograph</i></span><span class="pl"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 5V2h3M12 5V2H9M2 9v3h3M12 9v3H9" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></span></span>
+      </button>
+    </div>
+  </section>
+
   <section class="wrap clients" aria-labelledby="ww">
     <p class="eyebrow" id="ww">Worked with</p>
     <ul class="names"><li>Airtslab Creatives</li><li>Zyntra Digital</li><li>Allion Technologies</li><li>Firehouse Technology</li></ul>
@@ -385,6 +490,17 @@ h2 em{display:inline-block;will-change:transform}
     </div>
   </section>
 </main>
+<dialog class="player" id="player" aria-label="Film player">
+  <div class="pbar"><span class="pcount" id="pcount">1 / 6</span><button class="pbtn" id="pclose" type="button" aria-label="Close player"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>
+  <div class="pstage" id="pstage">
+    <button class="pbtn pnav prev" id="pprev" type="button" aria-label="Previous piece"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div id="pmedia" style="display:contents"></div>
+    <button class="pbtn pnav next" id="pnext" type="button" aria-label="Next piece"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+  <div class="pcap"><b id="ptitle"></b><span id="pmeta"></span></div>
+</dialog>
+<div class="fcur" id="fcur" aria-hidden="true"></div>
+
 
 <footer class="wrap foot"><span class="fbrand"><img src="assets/brand/logo-ink.png" alt="" width="253" height="200"><span>© <span id="yr">2026</span> Gayan Shyamal · Horana, Sri Lanka</span></span><a href="#top">Back to top ↑</a></footer>
 
@@ -397,9 +513,9 @@ h2 em{display:inline-block;will-change:transform}
   const v = document.getElementById('hv'), vb = document.getElementById('vbtn'), fade = document.getElementById('vfade');
   const PAUSE = '<svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1.5" width="3.4" height="11" rx="1" fill="currentColor"/><rect x="8.6" y="1.5" width="3.4" height="11" rx="1" fill="currentColor"/></svg>';
   const PLAY = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.6.6 0 0 0 .9.5l8.6-5.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>';
-  let userPaused = reduce, inView = true;
+  let userPaused = reduce, inView = true, playerOpen = false;
   const sync = () => { const p = v.paused; vb.innerHTML = p ? PLAY : PAUSE; vb.setAttribute('aria-label', p ? 'Play background video' : 'Pause background video'); };
-  const tryPlay = () => { if (userPaused || !inView) return; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); };
+  const tryPlay = () => { if (userPaused || !inView || playerOpen) return; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); };
   v.addEventListener('loadedmetadata', () => { v.playbackRate = .85; });
   v.addEventListener('play', sync); v.addEventListener('pause', sync);
   v.addEventListener('timeupdate', () => { if (!v.duration) return; fade.classList.toggle('on', v.duration - v.currentTime < .8 || v.currentTime < .2); });
@@ -529,6 +645,86 @@ h2 em{display:inline-block;will-change:transform}
   }
 
   document.getElementById('yr').textContent = new Date().getFullYear();
+  /* Films & stills */
+  const fgrid = document.getElementById('fgrid');
+  if (fgrid) {
+    const tiles = Array.from(fgrid.querySelectorAll('.ft'));
+    const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const saveData = navigator.connection && navigator.connection.saveData;
+    const previews = !reduce && !saveData;
+    const prev = t => t.querySelector('video');
+    const startPrev = t => { const pv = prev(t); if (!pv || !previews) return; if (!pv.src) pv.src = pv.dataset.src; const pr = pv.play(); if (pr && pr.then) pr.then(() => t.classList.add('playing')).catch(() => {}); };
+    const stopPrev = t => { const pv = prev(t); if (!pv) return; t.classList.remove('playing'); pv.pause(); };
+
+    if (fine) {
+      /* Hover previews and a small "Play" label that follows the pointer. */
+      const cur = document.getElementById('fcur');
+      let x = 0, y = 0, cx = 0, cy = 0, raf = 0, over = null;
+      const PLAYI = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.6.6 0 0 0 .9.5l8.6-5.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>';
+      const loop = () => { cx += (x - cx) * .22; cy += (y - cy) * .22; cur.style.transform = `translate3d(${cx}px,${cy}px,0) translate(-50%,-50%)`; raf = over ? requestAnimationFrame(loop) : 0; };
+      if (!reduce) fgrid.classList.add('cursor');
+      tiles.forEach(t => {
+        t.addEventListener('pointerenter', e => {
+          over = t; startPrev(t);
+          if (reduce) return;
+          cur.innerHTML = (t.dataset.kind === 'film' ? PLAYI + 'Play' : 'View');
+          x = cx = e.clientX; y = cy = e.clientY; cur.classList.add('on'); if (!raf) raf = requestAnimationFrame(loop);
+        });
+        t.addEventListener('pointermove', e => { x = e.clientX; y = e.clientY; });
+        t.addEventListener('pointerleave', () => { over = null; stopPrev(t); cur.classList.remove('on'); });
+      });
+    } else if (previews && 'IntersectionObserver' in window) {
+      /* Touch screens: a film previews while most of it is on screen. */
+      const io = new IntersectionObserver(es => es.forEach(e => e.intersectionRatio > .6 ? startPrev(e.target) : stopPrev(e.target)), { threshold: [0, .6, 1] });
+      tiles.filter(t => t.dataset.kind === 'film').forEach(t => io.observe(t));
+    }
+
+    /* Full-screen player */
+    const dlg = document.getElementById('player'), media = document.getElementById('pmedia');
+    const ptitle = document.getElementById('ptitle'), pmeta = document.getElementById('pmeta'), pcount = document.getElementById('pcount');
+    let idx = 0, heroWas = false;
+    const clear = () => { const old = media.querySelector('video'); if (old) { old.pause(); old.removeAttribute('src'); old.load(); } media.innerHTML = ''; };
+    const show = i => {
+      idx = (i + tiles.length) % tiles.length; const t = tiles[idx];
+      clear();
+      let el;
+      if (t.dataset.kind === 'film') {
+        el = document.createElement('video');
+        el.src = t.dataset.full; el.poster = t.dataset.poster; el.controls = true; el.playsInline = true; el.autoplay = true; el.preload = 'auto';
+        el.setAttribute('aria-label', t.dataset.title);
+        el.addEventListener('ended', () => show(idx + 1));
+      } else {
+        el = document.createElement('img'); el.src = t.dataset.full; el.alt = t.querySelector('img').alt;
+      }
+      media.appendChild(el);
+      ptitle.textContent = t.dataset.title; pmeta.textContent = t.dataset.meta; pcount.textContent = (idx + 1) + ' / ' + tiles.length;
+    };
+    const open = i => {
+      heroWas = !v.paused; playerOpen = true; v.pause();
+      tiles.forEach(stopPrev);
+      show(i);
+      dlg.showModal(); document.documentElement.style.overflow = 'hidden';
+    };
+    const close = () => { if (dlg.open) dlg.close(); };
+    dlg.addEventListener('close', () => { clear(); playerOpen = false; document.documentElement.style.overflow = ''; if (heroWas) tryPlay(); });
+    tiles.forEach((t, i) => t.addEventListener('click', () => open(i)));
+    document.getElementById('pclose').addEventListener('click', close);
+    document.getElementById('pprev').addEventListener('click', () => show(idx - 1));
+    document.getElementById('pnext').addEventListener('click', () => show(idx + 1));
+    dlg.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' && !(e.target instanceof HTMLVideoElement)) { e.preventDefault(); show(idx + 1); }
+      if (e.key === 'ArrowLeft' && !(e.target instanceof HTMLVideoElement)) { e.preventDefault(); show(idx - 1); }
+    });
+    dlg.addEventListener('click', e => { if (e.target === dlg || e.target.id === 'pstage') close(); });
+    /* Swipe left or right to move between pieces. */
+    let sx = 0, sy = 0;
+    dlg.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    dlg.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) show(idx + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  }
+
 })();
 </script>
 </body>

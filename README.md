@@ -17,6 +17,7 @@ scripts/              sync_behance.py: keeps the Work section in step with Behan
 .github/workflows/    Daily Behance sync
 assets/
   brand/              Logo (white and ink) and profile photo
+  films/              Films & stills section: full films, short previews, posters, photos
   media/              Hero film (desktop + phone), poster frame, contact image
   work/               Project thumbnails, one per Behance project
 ```
