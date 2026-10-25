@@ -203,7 +203,15 @@ h2 em{display:inline-block;will-change:transform}
   .ft:hover .pl{transform:scale(1.08)}
   .fgrid.cursor .ft{cursor:none}
   .fgrid.cursor .ft .pl{opacity:0}
+  .fcur{white-space:nowrap}
 }
+.ft .prog{position:absolute;z-index:3;left:0;right:0;bottom:0;height:3px;background:var(--accent);transform-origin:left;transform:scaleX(0);opacity:0;transition:opacity .3s}
+.ft.live .prog{opacity:1}
+.eqb{display:inline-flex;align-items:flex-end;gap:2px;height:12px}
+.eqb i{width:2.5px;height:4px;border-radius:1px;background:currentColor;animation:eq 1.1s ease-in-out infinite}
+.eqb i:nth-child(2){animation-delay:-.4s}.eqb i:nth-child(3){animation-delay:-.8s}
+.fcur .eqb{height:11px}
+.ft .pl svg{width:14px;height:14px}
 .fcur{position:fixed;z-index:30;left:0;top:0;pointer-events:none;display:inline-flex;align-items:center;gap:8px;padding:10px 16px 10px 12px;border-radius:999px;background:#fff;color:var(--ink);
   font:500 12px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;box-shadow:0 10px 30px rgba(20,14,28,.25);opacity:0;transition:opacity .25s}
 .fcur.on{opacity:1}
@@ -498,7 +506,7 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webk
   <section class="wrap" id="films">
     <div class="sec-head">
       <div><p class="eyebrow">Lifestyle · AI · Creative</p><h2>Stories in <em>motion</em></h2></div>
-      <p class="note">My own world beyond client briefs: lifestyle moments, AI experiments and creative films. Open any piece to watch it full screen, with sound.</p>
+      <p class="note">My own world beyond client briefs: lifestyle moments, AI experiments and creative films. Point at a film to play it with sound; tap on a phone.</p>
     </div>
     <div class="fgrid" id="fgrid">
       <button class="ft feat w3 h2" type="button" data-kind="film" data-full="assets/films/unforgettable-sri-lanka.mp4" data-poster="assets/films/unforgettable-sri-lanka-poster.jpg" data-title="Unforgettable Sri Lanka" data-meta="Short film · 1:15" aria-label="Play Unforgettable Sri Lanka, Short film, 1:15, with sound">
@@ -762,58 +770,100 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webk
   const fgrid = document.getElementById('fgrid');
   if (fgrid) {
     const tiles = Array.from(fgrid.querySelectorAll('.ft'));
+    const stills = tiles.filter(t => t.dataset.kind === 'still');
     const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
     const saveData = navigator.connection && navigator.connection.saveData;
     const previews = !reduce && !saveData;
-    const prev = t => t.querySelector('video');
-    const startPrev = t => { const pv = prev(t); if (!pv || !previews) return; if (!pv.src) pv.src = pv.dataset.src; const pr = pv.play(); if (pr && pr.then) pr.then(() => t.classList.add('playing')).catch(() => {}); };
-    const stopPrev = t => { const pv = prev(t); if (!pv) return; t.classList.remove('playing'); pv.pause(); };
+    const vid = t => t.querySelector('video');
+    const BARS = '<span class="eqb" aria-hidden="true"><i></i><i></i><i></i></span>';
+    const PLAYI = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.6.6 0 0 0 .9.5l8.6-5.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>';
+    const MUTEI = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h2.6L8 3.2v9.6L4.6 10H2z" fill="currentColor"/><path d="M10.5 6l3.5 4m0-4l-3.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg>';
+
+    /* Phones: short silent previews while a film is on screen (until it has been played with sound). */
+    const startPrev = t => { const pv = vid(t); if (!pv || !previews || pv.dataset.mode === 'full') return; if (!pv.src) pv.src = pv.dataset.src; const pr = pv.play(); if (pr && pr.then) pr.then(() => t.classList.add('playing')).catch(() => {}); };
+    const stopPrev = t => { const pv = vid(t); if (!pv || pv.dataset.mode === 'full') return; t.classList.remove('playing'); pv.pause(); };
+
+    /* Films play in their own tile, with sound: on hover with a mouse, on tap on a touch screen. */
+    let active = null;
+    const wantSound = () => prefGet() !== 'off';
+    films: for (const t of tiles) {
+      if (t.dataset.kind !== 'film') continue films;
+      const prog = document.createElement('span'); prog.className = 'prog'; prog.setAttribute('aria-hidden', 'true'); t.appendChild(prog);
+      vid(t).addEventListener('timeupdate', e => { const fv = e.target; if (fv.dataset.mode === 'full' && fv.duration) prog.style.transform = 'scaleX(' + (fv.currentTime / fv.duration).toFixed(4) + ')'; });
+    }
+    const label = t => { const fv = vid(t); t.querySelector('.pl').innerHTML = active === t ? (fv.muted ? MUTEI : BARS) : PLAYI; if (fine) cur.innerHTML = active === t ? (fv.muted ? MUTEI + 'Muted · click for sound' : BARS + 'Sound on · click to mute') : PLAYI + 'Play'; };
+    const startFull = t => {
+      if (active && active !== t) stopFull(active);
+      const fv = vid(t);
+      if (fv.dataset.mode !== 'full') {
+        fv.dataset.mode = 'full'; fv.loop = true; fv.preload = 'auto'; fv.src = t.dataset.full;
+        const pos = +t.dataset.pos || 0;
+        if (pos) fv.addEventListener('loadedmetadata', () => { try { fv.currentTime = pos; } catch (e) {} }, { once: true });
+      }
+      fv.muted = !wantSound(); if (!fv.muted) fv.volume = 1;
+      if (!v.paused) v.pause();
+      playerOpen = true;  // keeps the hero film quiet while a tile plays
+      active = t; t.classList.add('live', 'playing'); t.setAttribute('aria-pressed', 'true');
+      const pr = fv.play();
+      if (pr && pr.catch) pr.catch(() => { fv.muted = true; fv.play().catch(() => {}); label(t); });
+      label(t);
+    };
+    const stopFull = t => {
+      const fv = vid(t); t.dataset.pos = fv.currentTime || 0; fv.pause();
+      t.classList.remove('live', 'playing'); t.setAttribute('aria-pressed', 'false');
+      if (active === t) { active = null; playerOpen = false; tryPlay(); }
+      label(t);
+    };
+    const cur = document.getElementById('fcur');
+    tiles.forEach(t => { if (t.dataset.kind === 'film') t.setAttribute('aria-pressed', 'false'); });
 
     if (fine) {
-      /* Hover previews and a small "Play" label that follows the pointer. */
-      const cur = document.getElementById('fcur');
+      /* The label that follows the pointer shows what a click will do. */
       let x = 0, y = 0, cx = 0, cy = 0, raf = 0, over = null;
-      const PLAYI = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.6.6 0 0 0 .9.5l8.6-5.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>';
       const loop = () => { cx += (x - cx) * .22; cy += (y - cy) * .22; cur.style.transform = `translate3d(${cx}px,${cy}px,0) translate(-50%,-50%)`; raf = over ? requestAnimationFrame(loop) : 0; };
-      if (!reduce) fgrid.classList.add('cursor');
+      fgrid.classList.add('cursor');
       tiles.forEach(t => {
         t.addEventListener('pointerenter', e => {
-          over = t; startPrev(t);
-          if (reduce) return;
-          cur.innerHTML = (t.dataset.kind === 'film' ? PLAYI + 'Play' : 'View');
+          over = t;
+          if (t.dataset.kind === 'film') startFull(t); else cur.innerHTML = 'View';
           x = cx = e.clientX; y = cy = e.clientY; cur.classList.add('on'); if (!raf) raf = requestAnimationFrame(loop);
         });
         t.addEventListener('pointermove', e => { x = e.clientX; y = e.clientY; });
-        t.addEventListener('pointerleave', () => { over = null; stopPrev(t); cur.classList.remove('on'); });
+        t.addEventListener('pointerleave', () => { over = null; if (t.dataset.kind === 'film') stopFull(t); cur.classList.remove('on'); });
       });
     } else if (previews && 'IntersectionObserver' in window) {
-      /* Touch screens: a film previews while most of it is on screen. */
-      const io = new IntersectionObserver(es => es.forEach(e => e.intersectionRatio > .6 ? startPrev(e.target) : stopPrev(e.target)), { threshold: [0, .6, 1] });
+      const io = new IntersectionObserver(es => es.forEach(e => {
+        if (e.intersectionRatio > .6) startPrev(e.target);
+        else { stopPrev(e.target); if (active === e.target && e.intersectionRatio < .2) stopFull(e.target); }
+      }), { threshold: [0, .2, .6, 1] });
       tiles.filter(t => t.dataset.kind === 'film').forEach(t => io.observe(t));
     }
+    /* Click or tap: start a film; on a playing film, a mouse click switches the sound and a tap pauses. */
+    tiles.forEach(t => {
+      if (t.dataset.kind !== 'film') return;
+      t.addEventListener('click', () => {
+        if (active !== t) startFull(t);
+        else if (fine) { const fv = vid(t); fv.muted = !fv.muted; if (!fv.muted) fv.volume = 1; label(t); }
+        else stopFull(t);
+      });
+      t.addEventListener('blur', () => { if (active === t && !t.matches(':hover')) stopFull(t); });
+    });
+    document.addEventListener('visibilitychange', () => { if (document.hidden && active) stopFull(active); });
 
-    /* Full-screen player */
+    /* Photos open large. */
     const dlg = document.getElementById('player'), media = document.getElementById('pmedia');
     const ptitle = document.getElementById('ptitle'), pmeta = document.getElementById('pmeta'), pcount = document.getElementById('pcount');
     let idx = 0, heroWas = false;
-    const clear = () => { const old = media.querySelector('video'); if (old) { old.pause(); old.removeAttribute('src'); old.load(); } media.innerHTML = ''; };
+    const clear = () => { media.innerHTML = ''; };
     const show = i => {
-      idx = (i + tiles.length) % tiles.length; const t = tiles[idx];
+      idx = (i + stills.length) % stills.length; const t = stills[idx];
       clear();
-      let el;
-      if (t.dataset.kind === 'film') {
-        el = document.createElement('video');
-        el.src = t.dataset.full; el.poster = t.dataset.poster; el.controls = true; el.playsInline = true; el.autoplay = true; el.preload = 'auto';
-        el.setAttribute('controlslist', 'nodownload noplaybackrate noremoteplayback'); el.disablePictureInPicture = true; el.disableRemotePlayback = true;
-        el.setAttribute('aria-label', t.dataset.title);
-        el.addEventListener('ended', () => show(idx + 1));
-      } else {
-        el = document.createElement('img'); el.src = t.dataset.full; el.alt = t.querySelector('img').alt;
-      }
+      const el = document.createElement('img'); el.src = t.dataset.full; el.alt = t.querySelector('img').alt;
       media.appendChild(el);
-      ptitle.textContent = t.dataset.title; pmeta.textContent = t.dataset.meta; pcount.textContent = (idx + 1) + ' / ' + tiles.length;
+      ptitle.textContent = t.dataset.title; pmeta.textContent = t.dataset.meta; pcount.textContent = (idx + 1) + ' / ' + stills.length;
     };
     const open = i => {
+      if (active) stopFull(active);
       heroWas = !v.paused; playerOpen = true; v.pause();
       tiles.forEach(stopPrev);
       show(i);
@@ -821,7 +871,7 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webk
     };
     const close = () => { if (dlg.open) dlg.close(); };
     dlg.addEventListener('close', () => { clear(); playerOpen = false; document.documentElement.style.overflow = ''; if (heroWas) tryPlay(); });
-    tiles.forEach((t, i) => t.addEventListener('click', () => open(i)));
+    stills.forEach((t, i) => t.addEventListener('click', () => open(i)));
     document.getElementById('pclose').addEventListener('click', close);
     document.getElementById('pprev').addEventListener('click', () => show(idx - 1));
     document.getElementById('pnext').addEventListener('click', () => show(idx + 1));
