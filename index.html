@@ -527,8 +527,25 @@ h2 em{display:inline-block;will-change:transform}
   /* Sound: the film always starts silent (browsers block sound until a click). One click turns the soundtrack on and plays the film if it was paused. */
   const sb = document.getElementById('sbtn'), sx = document.getElementById('sx');
   const ssync = () => { const on = !v.muted; sb.setAttribute('aria-pressed', on); sb.setAttribute('aria-label', on ? 'Turn sound off' : 'Turn sound on'); sx.style.display = on ? 'none' : ''; };
-  sb.addEventListener('click', () => { v.muted = !v.muted; if (!v.muted) { v.volume = 1; if (v.paused) { userPaused = false; inView = true; tryPlay(); } } ssync(); });
+  /* Sound is on by default. Browsers only allow it after the visitor's first click, tap or key press, so the film starts silent and
+     the soundtrack comes in on that first interaction. Muting with the Sound button is remembered for later visits. */
+  const prefGet = () => { try { return localStorage.getItem('heroSound'); } catch (e) { return null; } };
+  const prefSet = on => { try { localStorage.setItem('heroSound', on ? 'on' : 'off'); } catch (e) {} };
+  const unmute = () => { v.muted = false; v.volume = 1; if (v.paused) tryPlay(); };
+  sb.addEventListener('click', () => { const on = v.muted; if (on) { userPaused = false; inView = true; unmute(); } else v.muted = true; prefSet(on); ssync(); disarm(); });
   v.addEventListener('volumechange', ssync);
+  const gestures = ['pointerdown', 'keydown', 'touchend'];
+  const onFirst = e => {
+    disarm();
+    if (e.target && e.target.closest && e.target.closest('#sbtn')) return;  // the Sound button handles its own click
+    if (prefGet() !== 'off' && !reduce) unmute();
+  };
+  const disarm = () => gestures.forEach(g => removeEventListener(g, onFirst, true));
+  if (prefGet() !== 'off' && !reduce) {
+    const policy = navigator.getAutoplayPolicy ? navigator.getAutoplayPolicy(v) : '';
+    if (policy === 'allowed') unmute();  // some browsers already allow sound for this site
+    else gestures.forEach(g => addEventListener(g, onFirst, { capture: true, passive: true }));
+  }
   ssync();
 
   /* Work filter */
