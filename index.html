@@ -827,7 +827,7 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webk
       const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
       actx = new AC(); jMaster = actx.createGain(); jMaster.gain.value = 0; jMaster.connect(actx.destination);
       jGains = [...LAYERS, 'music'].map(() => { const g = actx.createGain(); g.gain.value = 0; g.connect(jMaster); return g; });
-      [...LAYERS, 'music'].forEach((name, i) => fetch('assets/journey/amb-' + name + '.m4a').then(r => r.arrayBuffer()).then(b => actx.decodeAudioData(b)).then(buf => {
+      [...LAYERS, 'music'].forEach((name, i) => fetch('assets/journey/amb-' + name + '.mp4').then(r => r.arrayBuffer()).then(b => actx.decodeAudioData(b)).then(buf => {
         const src = actx.createBufferSource(); src.buffer = buf; src.loop = true; src.loopStart = .05; src.loopEnd = buf.duration - .05;
         src.connect(jGains[i]); src.start(0, .05);
       }).catch(() => {}));
