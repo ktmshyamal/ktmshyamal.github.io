@@ -287,6 +287,83 @@ h2 em{display:inline-block;will-change:transform}
 }
 /* Phones: the film keeps its full 16:9 frame, exactly as on a laptop, instead of being cropped to fill a tall screen.
    The menu sits above the film and the headline below it, on the page background. */
+/* Journey: one tall painted world, from the summit to the reef. The view stays pinned while scrolling pans down
+   through the painting; chapters fade in at each place, small effects drift on top, and ambient sound follows. */
+.journey{position:relative;padding:0;height:560svh;width:100vw;margin-left:calc(50% - 50vw);background:#1b1430;color:#fff}
+.jv{position:sticky;top:0;height:100svh;overflow:hidden;isolation:isolate}
+.jlayer{position:absolute;left:0;top:0;will-change:transform;transform-origin:0 0}
+.jworld{display:block;width:100%;height:auto;user-select:none}
+.jv::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(20,14,34,.55) 0%,rgba(20,14,34,0) 18%,rgba(20,14,34,0) 70%,rgba(20,14,34,.45) 100%)}
+.journey .nav{z-index:6}
+/* effects, placed in the painting's own coordinates (percent of its width and height) */
+.jfx{position:absolute;inset:0;pointer-events:none}
+.jfx .cloud{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(255,236,240,.9),rgba(255,226,236,.35) 60%,rgba(255,226,236,0));filter:blur(8px);animation:cdrift 26s ease-in-out infinite alternate}
+@keyframes cdrift{from{translate:-3vw 0}to{translate:3vw 0}}
+.jfx .bird{position:absolute;width:22px;height:10px;color:rgba(40,28,52,.75);animation:fly 22s linear infinite}
+.jfx .bird svg{width:100%;height:100%;animation:flap .7s ease-in-out infinite alternate;transform-origin:50% 60%}
+@keyframes fly{from{translate:-12vw 0}to{translate:112vw -6vh}}
+@keyframes flap{from{scale:1 1}to{scale:1 .35}}
+.jfx .ray{position:absolute;width:10%;height:22%;background:linear-gradient(180deg,rgba(255,214,150,.45),rgba(255,214,150,0));transform:rotate(-24deg);transform-origin:top;mix-blend-mode:screen;filter:blur(6px);animation:ray 7s ease-in-out infinite alternate}
+@keyframes ray{from{opacity:.25}to{opacity:.7}}
+.jfx .mist{position:absolute;width:30%;height:6%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0));filter:blur(10px);animation:mist 5s ease-in-out infinite alternate}
+@keyframes mist{from{opacity:.4;scale:.9}to{opacity:.85;scale:1.12}}
+.jfx .fly{position:absolute;width:5px;height:5px;border-radius:50%;background:#ffe9a8;box-shadow:0 0 10px 3px rgba(255,220,140,.7);animation:firefly 6s ease-in-out infinite alternate}
+@keyframes firefly{0%{opacity:0;translate:0 0}40%{opacity:1}100%{opacity:.2;translate:30px -40px}}
+.jfx .bub{position:absolute;width:8px;height:8px;border-radius:50%;border:1.5px solid rgba(220,245,255,.75);background:rgba(220,245,255,.12);animation:bub 7s ease-in infinite}
+@keyframes bub{from{translate:0 0;opacity:0}12%{opacity:1}to{translate:12px -420px;opacity:0}}
+/* chapters */
+.jch{position:absolute;z-index:4;top:50%;width:min(470px,40vw);translate:0 -40%;opacity:0;visibility:hidden;transition:opacity .7s ease,translate .9s cubic-bezier(.2,.7,.2,1),visibility 0s linear .7s}
+.jch.on{opacity:1;visibility:visible;translate:0 -50%;transition:opacity .7s ease,translate .9s cubic-bezier(.2,.7,.2,1),visibility 0s}
+.jch[data-side="left"]{left:clamp(20px,7vw,120px)}
+.jch[data-side="right"]{right:clamp(20px,7vw,120px)}
+.jch::before{content:"";position:absolute;z-index:-1;inset:-30% -40%;background:radial-gradient(closest-side,rgba(20,14,34,.62),rgba(20,14,34,0));pointer-events:none}
+.jeb{display:flex;align-items:center;gap:10px;margin:0 0 14px;font:500 11px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+.jeb::before{content:"";width:22px;height:1px;background:currentColor}
+.jt{margin:0;font-weight:500;font-size:clamp(46px,6.4vw,96px);line-height:.95;letter-spacing:-.045em;text-shadow:0 2px 30px rgba(20,14,34,.45)}
+.jt em{font-family:var(--f-serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+.jch.big .jt{font-size:clamp(56px,9vw,150px)}
+.jp{margin:18px 0 22px;max-width:40ch;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.88);text-shadow:0 1px 16px rgba(20,14,34,.6)}
+.jlink{display:inline-flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:500;font-size:15px;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:4px}
+.jlink:hover{border-color:#fff}
+.jch .pill{margin-top:4px}
+/* chapter dots, sound, scroll hint */
+.jdots{position:absolute;z-index:5;right:clamp(14px,2.2vw,30px);top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
+.jdots a{display:block;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);transition:background .3s,scale .3s}
+.jdots a.on{background:#fff;scale:1.5}
+.jdots a:focus-visible{outline:2px solid #fff;outline-offset:4px}
+.jsnd{position:absolute;z-index:5;left:clamp(14px,2.2vw,30px);bottom:clamp(14px,2.6vh,26px);border:0;cursor:pointer;height:40px;padding:0 15px 0 13px;color:#fff}
+.jsnd svg{width:16px;height:16px;flex:none}
+.jsnd .bars{display:inline-flex;align-items:flex-end;gap:2px;height:10px}
+.jsnd .bars i{width:2px;height:3px;border-radius:1px;background:currentColor}
+.jsnd[aria-pressed="true"] .bars i{animation:eq 1.1s ease-in-out infinite}
+.jsnd[aria-pressed="true"] .bars i:nth-child(2){animation-delay:-.4s}
+.jsnd[aria-pressed="true"] .bars i:nth-child(3){animation-delay:-.8s}
+.jsnd[aria-pressed="true"] .jsx{display:none}
+.jsnd:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.jhint{position:absolute;z-index:5;left:50%;bottom:clamp(16px,3vh,30px);translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:8px;font:500 10.5px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.8);transition:opacity .5s}
+.jhint i{width:1px;height:34px;background:linear-gradient(180deg,#fff,rgba(255,255,255,0));animation:hint 1.8s ease-in-out infinite}
+@keyframes hint{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.jhint.off{opacity:0}
+@media (max-width:700px){
+  .journey{height:520svh}
+  .journey .nav{position:absolute;padding:14px 16px}
+  .journey .logo{color:#fff}
+  .journey .logo .lw{display:block}.journey .logo .li{display:none}
+  .journey .nav .pill{background:#fff;color:var(--ink)}
+  .jch,.jch[data-side]{left:16px;right:16px;width:auto;top:auto;bottom:86px;translate:0 16px}
+  .jch.on{translate:0 0}
+  .jch::before{inset:-40% -20% -30%;background:radial-gradient(ellipse at 50% 70%,rgba(20,14,34,.75),rgba(20,14,34,0) 70%)}
+  .jt{font-size:clamp(40px,12vw,60px)}
+  .jch.big .jt{font-size:clamp(48px,15vw,76px)}
+  .jp{font-size:15px;margin:12px 0 16px}
+  .jdots{right:10px;gap:8px}
+  .jhint{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .jfx *{animation:none!important}
+  .jch,.jch.on{transition:opacity .3s}
+}
 /* Intro screen: one click to enter, which also lets the browser play the film with sound. Hidden unless the script shows it. */
 .gate{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:#1d1626;color:#fff;text-align:center;transition:opacity .9s ease,visibility 0s linear .9s}
 .gate[hidden]{display:none}
@@ -345,7 +422,7 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webk
 </head>
 <body>
 <div class="gate" id="gate" hidden role="dialog" aria-modal="true" aria-labelledby="gt">
-  <img class="gbg" src="assets/media/hero-poster.jpg?v=ffd6ecdb" alt="">
+  <img class="gbg" src="assets/journey/world-top.jpg" alt="">
   <div class="gin">
     <img class="glogo" src="assets/brand/logo-white.png" alt="" width="253" height="200">
     <p class="geb">Visual &amp; Motion Designer · Sri Lanka</p>
@@ -356,18 +433,88 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webk
   </div>
 </div>
 
-<header class="hero" id="top">
+<section class="journey" id="top" aria-label="A journey from the summit to the reef">
+  <div class="jv" id="jv">
+    <div class="jlayer" id="jlayer">
+      <img class="jworld" id="jworld" src="assets/journey/world-1600.jpg" srcset="assets/journey/world-1000.jpg 1000w, assets/journey/world-1600.jpg 1600w" sizes="(max-width: 700px) 190vw, 100vw" alt="A painted world: a traveller on a mountain summit above the clouds, a pine forest, a waterfall with a leopard, a sunset beach with palms and a coral reef with a diver near a shipwreck." width="1600" height="6450" fetchpriority="high">
+      <div class="jfx" aria-hidden="true">
+        <span class="bird" style="left:10%;top:3.2%;animation-delay:0s;animation-duration:20s"><svg viewBox="0 0 22 10"><path d="M1 8 Q6 1 11 6 Q16 1 21 8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
+        <span class="bird" style="left:25%;top:2.4%;animation-delay:-6s;animation-duration:23s"><svg viewBox="0 0 22 10"><path d="M1 8 Q6 1 11 6 Q16 1 21 8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
+        <span class="bird" style="left:40%;top:4.0%;animation-delay:-11s;animation-duration:26s"><svg viewBox="0 0 22 10"><path d="M1 8 Q6 1 11 6 Q16 1 21 8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
+        <span class="bird" style="left:18%;top:5.0%;animation-delay:-15s;animation-duration:29s"><svg viewBox="0 0 22 10"><path d="M1 8 Q6 1 11 6 Q16 1 21 8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
+        <span class="bird" style="left:50%;top:2.8%;animation-delay:-3s;animation-duration:32s"><svg viewBox="0 0 22 10"><path d="M1 8 Q6 1 11 6 Q16 1 21 8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
+        <span class="bird" style="left:32%;top:5.8%;animation-delay:-9s;animation-duration:35s"><svg viewBox="0 0 22 10"><path d="M1 8 Q6 1 11 6 Q16 1 21 8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
+        <span class="cloud" style="left:30%;top:8.5%;width:50%;height:3.6%;animation-delay:0s"></span>
+        <span class="cloud" style="left:55%;top:12.5%;width:52%;height:4.0%;animation-delay:-8s"></span>
+        <span class="cloud" style="left:-10%;top:17.5%;width:55%;height:3.2%;animation-delay:-15s"></span>
+        <span class="ray" style="left:62%;top:25.5%;animation-delay:0s"></span>
+        <span class="ray" style="left:72%;top:25.0%;animation-delay:-2.5s"></span>
+        <span class="ray" style="left:82%;top:26.0%;animation-delay:-4.5s"></span>
+        <span class="mist" style="left:18%;top:61.5%"></span>
+        <span class="fly" style="left:30%;top:33%;animation-delay:0s"></span>
+        <span class="fly" style="left:70%;top:36%;animation-delay:-1.5s"></span>
+        <span class="fly" style="left:58%;top:46%;animation-delay:-3s"></span>
+        <span class="fly" style="left:12%;top:50%;animation-delay:-4.2s"></span>
+        <span class="fly" style="left:80%;top:57%;animation-delay:-2.2s"></span>
+        <span class="bub" style="left:20%;top:96%;animation-delay:0s"></span>
+        <span class="bub" style="left:26%;top:95%;animation-delay:-1.6s"></span>
+        <span class="bub" style="left:46%;top:98%;animation-delay:-3.1s"></span>
+        <span class="bub" style="left:62%;top:97%;animation-delay:-4.4s"></span>
+        <span class="bub" style="left:75%;top:98.5%;animation-delay:-2.3s"></span>
+        <span class="bub" style="left:35%;top:99%;animation-delay:-5.5s"></span>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Main">
+      <a class="logo" href="#top"><img class="lw" src="assets/brand/logo-white.png" alt="" width="253" height="200"><img class="li" src="assets/brand/logo-ink.png" alt="" width="253" height="200">Gayan Shyamal</a>
+      <ul><li><a href="#work">Work</a></li><li><a href="#films">Films</a></li><li><a href="#services">Services</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
+      <a class="pill mag" href="#contact"><span class="dot" aria-hidden="true">✦</span><span>Get in touch</span></a>
+  </nav>
+
+    <div class="jch big" id="jc1" data-side="right">
+      <p class="jeb">01 · Summit</p>
+      <h1 class="jt">Gayan <em>Shyamal</em></h1>
+      <p class="jp">Visual and motion designer from Sri Lanka. Every project starts like a climb: a clear view of where we are going.</p>
+      <a class="pill mag" href="#jc2"><span class="dot" aria-hidden="true">↓</span>Start the journey</a>
+    </div>
+    <div class="jch " id="jc2" data-side="left">
+      <p class="jeb">02 · Pine forest</p>
+      <h2 class="jt">Brands with <em>roots</em></h2>
+      <p class="jp">Identities, corporate profiles and campaign visuals that grow with a business, for local and international brands.</p>
+      <a class="jlink" href="#services">What I do <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="jch " id="jc3" data-side="right">
+      <p class="jeb">03 · Waterfall</p>
+      <h2 class="jt">Motion with <em>flow</em></h2>
+      <p class="jp">Launch films, product stories and motion graphics with rhythm, energy and a little wildness.</p>
+      <a class="jlink" href="#films">Stories in motion <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="jch " id="jc4" data-side="right">
+      <p class="jeb">04 · Coast</p>
+      <h2 class="jt">AI &amp; <em>social</em></h2>
+      <p class="jp">Social campaigns and AI-assisted visuals for brands that live online. Fresh every week, like the tide.</p>
+      <a class="jlink" href="#work">Recent work <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="jch " id="jc5" data-side="right">
+      <p class="jeb">05 · The deep</p>
+      <h2 class="jt">Let’s go <em>deeper</em></h2>
+      <p class="jp">Have a brand, a launch or a story to tell? Let’s dive in together.</p>
+      <a class="pill mag" href="#contact"><span class="dot" aria-hidden="true">✦</span>Start a project</a>
+    </div>
+    <ul class="jdots" aria-label="Chapters">
+      <li><a href="#jc1" aria-label="Chapter 1"></a></li><li><a href="#jc2" aria-label="Chapter 2"></a></li><li><a href="#jc3" aria-label="Chapter 3"></a></li><li><a href="#jc4" aria-label="Chapter 4"></a></li><li><a href="#jc5" aria-label="Chapter 5"></a></li>
+    </ul>
+    <button class="glass jsnd" id="jsnd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h2.6L8 3.2v9.6L4.6 10H2z" fill="currentColor"/><path class="jsx" d="M10.5 6l3.5 4m0-4l-3.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span>Sound</span></button>
+    <p class="jhint" id="jhint" aria-hidden="true">Scroll to descend<i></i></p>
+  </div>
+</section>
+
+<header class="hero" id="reel">
   <video id="hv" muted playsinline loop preload="auto" poster="assets/media/hero-poster.jpg?v=ffd6ecdb" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback>
     <source src="assets/media/hero-540.mp4?v=89b102c1" type="video/mp4" media="(max-width: 700px)">
     <source src="assets/media/hero.mp4?v=f72f9212" type="video/mp4">
   </video>
   <div class="shade"></div>
   <div class="vfade" id="vfade"></div>
-  <nav class="nav" aria-label="Main">
-    <a class="logo" href="#top"><img class="lw" src="assets/brand/logo-white.png" alt="" width="253" height="200"><img class="li" src="assets/brand/logo-ink.png" alt="" width="253" height="200">Gayan Shyamal</a>
-    <ul><li><a href="#work">Work</a></li><li><a href="#films">Films</a></li><li><a href="#services">Services</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
-    <a class="pill mag" href="#contact"><span class="dot" aria-hidden="true">✦</span><span>Get in touch</span></a>
-  </nav>
   <div class="hero-copy"><div class="hc-in" id="hcin">
     <h1 class="rise">The view from <em>here</em></h1>
     <p class="hero-sub rise d1">Visual and motion design from Sri Lanka. Branding, motion, launch films and social content for local and international brands.</p>
@@ -609,7 +756,7 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webk
   const onFirst = e => {
     disarm();
     if (e.target && e.target.closest && e.target.closest('#sbtn')) return;  // the Sound button handles its own click
-    if (prefGet() !== 'off' && !reduce) unmute();
+    if (prefGet() !== 'off' && !reduce) { unmute(); ambientStart(); }
   };
   const disarm = () => gestures.forEach(g => removeEventListener(g, onFirst, true));
   if (prefGet() !== 'off' && !reduce) {
@@ -618,6 +765,87 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webk
     else gestures.forEach(g => addEventListener(g, onFirst, { capture: true, passive: true }));
   }
   ssync();
+
+  /* Journey: pan down the painting while scrolling, show the chapter for the place in view, mix the ambient sound. */
+  let actx = null, jGains = null, jMaster = null, jOn = false, jWant = [0, 0, 0, 0, 0], jVis = 1;
+  const jr = document.getElementById('top'), jlayer = document.getElementById('jlayer'), jworld = document.getElementById('jworld');
+  const jchs = Array.from(document.querySelectorAll('.jch')), jdots = Array.from(document.querySelectorAll('.jdots a'));
+  const jhint = document.getElementById('jhint'), jsnd = document.getElementById('jsnd');
+  /* Where each place sits in the painting, as a fraction of its height (top of the summit = 0, sea floor = 1). */
+  const PLACES = [.09, .31, .55, .755, .9];
+  const LAYERS = ['summit', 'forest', 'waterfall', 'coast', 'deep'];
+  let jm = null, jLast = -1;
+  const jMeasure = () => {
+    const vw = innerWidth, vh = innerHeight;
+    const iw = Math.max(vw, vw <= 700 ? vh * .74 : 0);           // phones show a wider crop so details stay readable
+    const ih = iw * (jworld.naturalHeight && jworld.naturalWidth ? jworld.naturalHeight / jworld.naturalWidth : 4);
+    jlayer.style.width = iw + 'px';
+    jm = { vw, vh, iw, ih, top: jr.offsetTop, len: jr.offsetHeight - vh, x: (vw - iw) / 2 };
+    /* Scroll progress at which each place is centred, spread evenly when the painting is too short to centre them all. */
+    const raw = PLACES.map(pc => (pc * ih - vh / 2) / (ih - vh));
+    jm.at = raw.map((r, i) => Math.min(1, Math.max(0, r)));
+    jm.at = jm.at.map((a, i) => (i === 0 ? 0 : i === jm.at.length - 1 ? 1 : a));
+    for (let i = 1; i < jm.at.length; i++) if (jm.at[i] - jm.at[i - 1] < .12) jm.at[i] = Math.min(1, jm.at[i - 1] + .12);
+    for (let i = jm.at.length - 2; i >= 0; i--) if (jm.at[i + 1] - jm.at[i] < .12) jm.at[i] = Math.max(0, jm.at[i + 1] - .12);
+    jLast = -1;
+  };
+  const jWeights = c => PLACES.map(pc => Math.exp(-Math.pow((c - pc) / .1, 2)));
+  const jTick = () => {
+    if (!jm) return;
+    const y = scrollY - jm.top;
+    const pr = Math.min(1, Math.max(0, y / jm.len));
+    const k = Math.round(Math.min(Math.max(y, 0), jm.len + jm.vh) / 2);   // keeps updating just past the end, for the sound fade
+    if (k !== jLast) {
+      jLast = k;
+      const ty = -pr * (jm.ih - jm.vh);
+      jlayer.style.transform = `translate3d(${jm.x}px,${ty}px,0)`;
+      const c = (-ty + jm.vh / 2) / jm.ih;                       // the painting's height fraction at the centre of the screen
+      let best = 0, bd = 9;
+      jm.at.forEach((pa, i) => { const d = Math.abs(pa - pr); if (d < bd) { bd = d; best = i; } });
+      jchs.forEach((el, i) => el.classList.toggle('on', i === best));
+      jdots.forEach((el, i) => el.classList.toggle('on', i === best));
+      jhint.classList.toggle('off', pr > .02);
+      jMix(jWeights(c), y < jm.len + jm.vh * .5 ? 1 - Math.min(1, Math.max(0, (y - jm.len) / (jm.vh * .5))) : 0);
+    }
+  };
+  /* Chapter links and dots scroll to the right point of the journey rather than to the element. */
+  const jGo = i => { if (!jm) return; scrollTo({ top: jm.top + jm.at[i] * jm.len + 2, behavior: reduce ? 'auto' : 'smooth' }); };
+  document.querySelectorAll('a[href^="#jc"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); jGo(+a.getAttribute('href').slice(3) - 1); }));
+  if (jworld.complete) jMeasure(); else jworld.addEventListener('load', () => { jMeasure(); jTick(); });
+  jMeasure();
+  addEventListener('resize', () => { jMeasure(); jTick(); });
+  addEventListener('scroll', jTick, { passive: true });
+  jTick();
+
+  /* Ambient sound: one looping layer per place plus a music bed, crossfaded by scroll position. Uses Web Audio so the
+     loops are seamless; it can only start inside a click or tap, which the intro screen or the Sound button provides. */
+  function jMix(w, vis) { jWant = w; jVis = vis; if (!actx || !jGains) return; const now = actx.currentTime;
+    jGains.forEach((g, i) => g.gain.setTargetAtTime((i < 5 ? jWant[i] * .9 : .55) * jVis, now, .35)); }
+  function ambientStart() {
+    if (reduce && false) return;
+    if (!actx) {
+      const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+      actx = new AC(); jMaster = actx.createGain(); jMaster.gain.value = 0; jMaster.connect(actx.destination);
+      jGains = [...LAYERS, 'music'].map(() => { const g = actx.createGain(); g.gain.value = 0; g.connect(jMaster); return g; });
+      [...LAYERS, 'music'].forEach((name, i) => fetch('assets/journey/amb-' + name + '.m4a').then(r => r.arrayBuffer()).then(b => actx.decodeAudioData(b)).then(buf => {
+        const src = actx.createBufferSource(); src.buffer = buf; src.loop = true; src.loopStart = .05; src.loopEnd = buf.duration - .05;
+        src.connect(jGains[i]); src.start(0, .05);
+      }).catch(() => {}));
+    }
+    if (actx.state === 'suspended') actx.resume();
+    jOn = true; jMaster.gain.setTargetAtTime(1, actx.currentTime, .6); jMix(jWant, jVis); jSync();
+  }
+  function ambientStop() { jOn = false; if (actx) jMaster.gain.setTargetAtTime(0, actx.currentTime, .25); jSync(); }
+  function jSync() { jsnd.setAttribute('aria-pressed', jOn); jsnd.setAttribute('aria-label', jOn ? 'Turn sound off' : 'Turn sound on'); }
+  jsnd.addEventListener('click', () => {
+    const on = !jOn; prefSet(on); disarm();
+    if (on) { ambientStart(); v.muted = false; v.volume = 1; } else { ambientStop(); v.muted = true; }
+    ssync();
+  });
+  /* The hero film's Sound button switches the journey's sound too, so there is one sound setting for the page. */
+  sb.addEventListener('click', () => { if (v.muted) ambientStop(); else ambientStart(); });
+  document.addEventListener('visibilitychange', () => { if (!actx) return; if (document.hidden) actx.suspend(); else if (jOn) actx.resume(); });
+  jSync();
 
   /* Intro screen, once per visit. Its Enter button is the click browsers need before a site may play sound. */
   const gate = document.getElementById('gate');
@@ -637,6 +865,7 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webk
       playerOpen = false; userPaused = false; inView = true;
       try { v.currentTime = 0; } catch (e) {}
       v.muted = !sound; if (sound) v.volume = 1;
+      if (sound) ambientStart();
       tryPlay(); ssync();
       gate.classList.add('out');
       setTimeout(() => { gate.hidden = true; }, 950);
@@ -678,7 +907,7 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webk
 
   /* ---------- Motion ---------- */
   if (!reduce) {
-    const hero = document.getElementById('top'), hcin = document.getElementById('hcin');
+    const hero = document.getElementById('reel'), hcin = document.getElementById('hcin');
     const lede = document.getElementById('lede'), mq = document.getElementById('mq');
     /* Split the intro paragraph into words; each fades up from faint as you read down. */
     const words = [];
@@ -696,10 +925,10 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webk
     split(lede);
     const ems = Array.from(document.querySelectorAll('h2 em')).map(el => ({ el, c: 0, x: null }));
     /* Positions are measured once per resize, never inside the frame loop. */
-    let vh = innerHeight, heroH = 1, ledeTop = 0, ledeH = 1, mqHalf = 1;
+    let vh = innerHeight, heroH = 1, heroTop = 0, ledeTop = 0, ledeH = 1, mqHalf = 1;
     const measure = () => {
       vh = innerHeight; const sy = scrollY;
-      heroH = hero.offsetHeight;
+      heroH = hero.offsetHeight; heroTop = hero.getBoundingClientRect().top + sy;
       const lr = lede.getBoundingClientRect(); ledeTop = lr.top + sy; ledeH = lr.height;
       ems.forEach(e => { const r = e.el.getBoundingClientRect(); e.c = r.top + sy + r.height / 2; });
       mqHalf = mq.scrollWidth / 2;
@@ -711,11 +940,11 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webk
     function tick(now) {
       const dt = Math.min(.05, (now - last) / 1000); last = now;
       const sy = scrollY;
-      /* Hero: the copy rises and fades, the footage pushes in, as you leave the top. */
-      const k = clamp(sy / heroH);
+      /* Hero film: the copy rises and fades, the footage pushes in, as you scroll past it. */
+      const hy = Math.max(0, sy - heroTop), k = clamp(hy / heroH);
       if (k !== heroK) {
         heroK = k;
-        hcin.style.transform = 'translate3d(0,' + (-sy * .28).toFixed(1) + 'px,0)';
+        hcin.style.transform = 'translate3d(0,' + (-hy * .28).toFixed(1) + 'px,0)';
         hcin.style.opacity = (1 - clamp(k * 1.6)).toFixed(3);
         v.style.transform = 'scale(' + (1 + k * .09).toFixed(4) + ')';
       }

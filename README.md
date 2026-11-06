@@ -18,6 +18,7 @@ scripts/              sync_behance.py: keeps the Work section in step with Behan
 assets/
   brand/              Logo (white and ink) and profile photo
   films/              Films & stills section: full films, short previews, posters, photos
+  journey/            Scroll journey: the painted world (desktop and phone sizes) and its ambient sound loops
   media/              Hero film (desktop + phone), poster frame, contact image
   work/               Project thumbnails, one per Behance project
 ```
